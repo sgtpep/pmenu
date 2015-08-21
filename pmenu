@@ -34,9 +34,6 @@ def filter_items():
     if query_text:
         filtered_items = sorted(filtered_items, key=lambda filtered_item: filtered_item[1], reverse=True)
 
-def exit():
-    sys.exit()
-
 def redraw(window):
     window.erase()
 
@@ -83,11 +80,11 @@ def main(window):
         elif not isinstance(char, str):
             continue
         elif char == '\n':
-            exit()
+            return
         elif char == '\b':
             query_text = query_text[:-1]
         elif keyname == '^G':
-            exit()
+            sys.exit(130)
         elif keyname == '^U':
             query_text = ''
         elif keyname == '^W':
@@ -110,3 +107,5 @@ def main(window):
         redraw(window)
 
 curses.wrapper(main)
+
+print(filtered_items[selection_index][0])
