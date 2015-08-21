@@ -7,6 +7,10 @@ import difflib
 import curses
 import argparse
 
+required_version = (3, 3)
+if sys.version_info < required_version:
+    sys.exit("Python {}.{} or newer is required.".format(*required_version))
+
 prompt_text = "> "
 query_text = ''
 input_items = sys.stdin.read().splitlines()
