@@ -6,6 +6,9 @@ import signal
 import unicodedata
 import curses
 
+prompt_text = "> "
+query_text = ''
+
 def signal_handler(signum, frame):
     sys.exit(130)
 signal.signal(signal.SIGINT, signal_handler)
@@ -13,28 +16,45 @@ signal.signal(signal.SIGINT, signal_handler)
 def exit():
     sys.exit()
 
+def redraw(window):
+    window.erase()
+
+    window.addstr(prompt_text)
+
+    query_text_offset = len(query_text) - (curses.COLS - len(prompt_text) - 1)
+    if query_text_offset < 0:
+        query_text_offset = 0
+    window.addstr(0, len(prompt_text), query_text[query_text_offset:])
+
+    window.refresh()
+
 def main(window):
+    global query_text
+
     input_items = sys.stdin.read().splitlines()
 
     terminal_file = open("/dev/tty")
     os.dup2(terminal_file.fileno(), 0)
 
-    window.addstr("> ")
+    redraw(window)
 
-    query_window = curses.newwin(1, curses.COLS, 0, 2)
-
-    query_text = u''
     while True:
         char = window.get_wch()
-        if not isinstance(char, str):
-            continue
+        if char == curses.KEY_RESIZE:
+            y, x = window.getmaxyx()
+            curses.resizeterm(y, x)
+            redraw(window)
 
-        keyname = curses.keyname(ord(char)).decode('utf8')
-        if char == '\n':
+            continue
+        elif not isinstance(char, str):
+            continue
+        elif char == '\n':
             exit()
         elif char == '\b':
             query_text = query_text[:-1]
-        elif keyname == '^G':
+
+        keyname = curses.keyname(ord(char)).decode('utf8')
+        if keyname == '^G':
             exit()
         elif keyname == '^U':
             query_text = ''
@@ -45,11 +65,6 @@ def main(window):
         else:
             query_text += char
 
-        query_window.erase()
-        query_text_offset = len(query_text) - (curses.COLS - 3)
-        if query_text_offset < 0:
-            query_text_offset = 0
-        query_window.addstr(0, 0, query_text[query_text_offset:])
-        query_window.refresh()
+        redraw(window)
 
 curses.wrapper(main)
