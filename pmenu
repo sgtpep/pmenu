@@ -67,7 +67,6 @@ def change_selection(new_selection_index):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', '--name', help="MRU list name")
-    parser.add_argument('-v', '--vim', action='store_true', help="enable workarounds for VIM's system()")
 
     return parser.parse_args()
 
@@ -168,6 +167,7 @@ def redirect_stdio(func):
         os.dup2(prev_stdout, 1)
 
 def curses_wrapper(func):
+    is_vim = os.environ.get('VIM')
     try:
         screen = curses.initscr()
         curses.noecho()
@@ -178,7 +178,7 @@ def curses_wrapper(func):
         except:
             pass
 
-        if args.vim:
+        if is_vim:
             curses.curs_set(1)
 
         func(screen)
@@ -187,7 +187,7 @@ def curses_wrapper(func):
             screen.keypad(0)
             curses.echo()
             curses.nocbreak()
-            if not args.vim:
+            if not is_vim:
                 curses.endwin()
 
 if __name__ == '__main__':
