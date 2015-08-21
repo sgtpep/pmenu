@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+import os
+import sys
+import re
+import signal
+import unicodedata
+import curses
+
+def signal_handler(signum, frame):
+    sys.exit(130)
+signal.signal(signal.SIGINT, signal_handler)
+
+def exit():
+    sys.exit()
+
+def main(window):
+    input_items = sys.stdin.read().splitlines()
+
+    terminal_file = open("/dev/tty")
+    os.dup2(terminal_file.fileno(), 0)
+
+    window.addstr("> ")
+
+    query_window = curses.newwin(1, curses.COLS, 0, 2)
+
+    query_text = u''
+    while True:
+        char = window.get_wch()
+        if not isinstance(char, str):
+            continue
+
+        keyname = curses.keyname(ord(char)).decode('utf8')
+        if char == '\n':
+            exit()
+        elif char == '\b':
+            query_text = query_text[:-1]
+        elif keyname == '^G':
+            exit()
+        elif keyname == '^U':
+            query_text = ''
+        elif keyname == '^W':
+            query_text = re.sub(r"[^\s]*\s*$", '', query_text)
+        elif len(keyname) == 2 and keyname[0] == '^':
+            continue
+        else:
+            query_text += char
+
+        query_window.erase()
+        query_window.addstr(0, 0, query_text)
+        query_window.refresh()
+
+curses.wrapper(main)
