@@ -10,6 +10,7 @@ prompt_text = "> "
 query_text = ''
 input_items = sys.stdin.read().splitlines()
 filtered_items = None
+selection_index = 0
 
 def signal_handler(signum, frame):
     sys.exit(130)
@@ -42,7 +43,8 @@ def redraw(window):
     window.addstr(prompt_text)
 
     for i, filtered_item in enumerate(filtered_items[:curses.LINES - 1]):
-        window.insstr(i + 1, 0, filtered_item[0][:curses.COLS])
+        item_attr = curses.A_REVERSE if i == selection_index else curses.A_NORMAL
+        window.insstr(i + 1, 0, filtered_item[0][:curses.COLS], item_attr)
 
     query_text_offset = len(query_text) - (curses.COLS - len(prompt_text) - 1)
     if query_text_offset < 0:
@@ -51,22 +53,32 @@ def redraw(window):
 
     window.refresh()
 
+def change_selection(new_selection_index):
+    global selection_index
+
+    if new_selection_index < 0 or new_selection_index >= min(len(filtered_items), curses.LINES - 1):
+        return
+
+    selection_index = new_selection_index
+
 def main(window):
-    global query_text
+    global query_text, selection_index
 
     terminal_file = open("/dev/tty")
     os.dup2(terminal_file.fileno(), 0)
 
-    while True:
-        filter_items()
-        redraw(window)
+    filter_items()
+    redraw(window)
 
+    while True:
         char = window.get_wch()
+        if isinstance(char, str):
+            keyname = curses.keyname(ord(char)).decode('utf8')
         if char == curses.KEY_RESIZE:
             y, x = window.getmaxyx()
             curses.resizeterm(y, x)
+            selection_index = 0
             redraw(window)
-
             continue
         elif not isinstance(char, str):
             continue
@@ -74,17 +86,27 @@ def main(window):
             exit()
         elif char == '\b':
             query_text = query_text[:-1]
-
-        keyname = curses.keyname(ord(char)).decode('utf8')
-        if keyname == '^G':
+        elif keyname == '^G':
             exit()
         elif keyname == '^U':
             query_text = ''
         elif keyname == '^W':
             query_text = re.sub(r"\w*[^\w]*$", '', query_text)
+        elif keyname == '^N':
+            change_selection(selection_index + 1)
+            redraw(window)
+            continue
+        elif keyname == '^P':
+            change_selection(selection_index - 1)
+            redraw(window)
+            continue
         elif len(keyname) == 2 and keyname[0] == '^':
             continue
         else:
             query_text += char
+
+        selection_index = 0
+        filter_items()
+        redraw(window)
 
 curses.wrapper(main)
