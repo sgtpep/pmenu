@@ -69,35 +69,35 @@ def main(window):
 
     while True:
         char = window.get_wch()
-        if isinstance(char, str):
-            keyname = curses.keyname(ord(char)).decode('utf8')
+        keyname = curses.keyname(char).decode('utf8') if isinstance(char, int) else None
+        keyname_string = curses.keyname(ord(char)).decode('utf8') if isinstance(char, str) else None
         if char == curses.KEY_RESIZE:
             y, x = window.getmaxyx()
             curses.resizeterm(y, x)
             selection_index = 0
             redraw(window)
             continue
-        elif not isinstance(char, str):
+        elif char == '\b' or keyname == 'KEY_BACKSPACE':
+            query_text = query_text[:-1]
+        elif isinstance(char, int):
             continue
         elif char == '\n':
             return
-        elif char == '\b':
-            query_text = query_text[:-1]
-        elif keyname == '^G':
+        elif keyname_string == '^G':
             sys.exit(130)
-        elif keyname == '^U':
+        elif keyname_string == '^U':
             query_text = ''
-        elif keyname == '^W':
+        elif keyname_string == '^W':
             query_text = re.sub(r"\w*[^\w]*$", '', query_text)
-        elif keyname == '^N':
+        elif keyname_string == '^N':
             change_selection(selection_index + 1)
             redraw(window)
             continue
-        elif keyname == '^P':
+        elif keyname_string == '^P':
             change_selection(selection_index - 1)
             redraw(window)
             continue
-        elif len(keyname) == 2 and keyname[0] == '^':
+        elif len(keyname_string) == 2 and keyname_string[0] == '^':
             continue
         else:
             query_text += char
