@@ -3,7 +3,7 @@ import os
 import sys
 import re
 import signal
-import unicodedata
+import difflib
 import curses
 
 prompt_text = "> "
@@ -19,8 +19,19 @@ def filter_items():
     global filtered_items
 
     filtered_items = []
+    query_text_regex = re.compile(r".*".join(re.escape(query_text_char) for query_text_char in query_text), flags=re.IGNORECASE)
     for input_item in input_items:
-        filtered_items.append(input_item)
+        if query_text and not query_text_regex.search(input_item):
+            continue
+
+        if query_text:
+            item_score = difflib.SequenceMatcher(None, input_item, query_text).quick_ratio()
+        else:
+            item_score = 1
+        filtered_items.append((input_item, item_score))
+
+    if query_text:
+        filtered_items = sorted(filtered_items, key=lambda filtered_item: filtered_item[1], reverse=True)
 
 def exit():
     sys.exit()
@@ -31,7 +42,7 @@ def redraw(window):
     window.addstr(prompt_text)
 
     for i, filtered_item in enumerate(filtered_items[:curses.LINES - 1]):
-        window.insstr(i + 1, 0, filtered_item[:curses.COLS])
+        window.insstr(i + 1, 0, filtered_item[0][:curses.COLS])
 
     query_text_offset = len(query_text) - (curses.COLS - len(prompt_text) - 1)
     if query_text_offset < 0:
