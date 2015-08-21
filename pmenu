@@ -39,14 +39,17 @@ def main(window):
         elif keyname == '^U':
             query_text = ''
         elif keyname == '^W':
-            query_text = re.sub(r"[^\s]*\s*$", '', query_text)
+            query_text = re.sub(r"\w*[^\w]*$", '', query_text)
         elif len(keyname) == 2 and keyname[0] == '^':
             continue
         else:
             query_text += char
 
         query_window.erase()
-        query_window.addstr(0, 0, query_text)
+        query_text_offset = len(query_text) - (curses.COLS - 3)
+        if query_text_offset < 0:
+            query_text_offset = 0
+        query_window.addstr(0, 0, query_text[query_text_offset:])
         query_window.refresh()
 
 curses.wrapper(main)
