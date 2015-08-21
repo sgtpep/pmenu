@@ -8,10 +8,19 @@ import curses
 
 prompt_text = "> "
 query_text = ''
+input_items = sys.stdin.read().splitlines()
+filtered_items = None
 
 def signal_handler(signum, frame):
     sys.exit(130)
 signal.signal(signal.SIGINT, signal_handler)
+
+def filter_items():
+    global filtered_items
+
+    filtered_items = []
+    for input_item in input_items:
+        filtered_items.append(input_item)
 
 def exit():
     sys.exit()
@@ -20,6 +29,9 @@ def redraw(window):
     window.erase()
 
     window.addstr(prompt_text)
+
+    for i, filtered_item in enumerate(filtered_items[:curses.LINES - 1]):
+        window.insstr(i + 1, 0, filtered_item[:curses.COLS])
 
     query_text_offset = len(query_text) - (curses.COLS - len(prompt_text) - 1)
     if query_text_offset < 0:
@@ -31,14 +43,13 @@ def redraw(window):
 def main(window):
     global query_text
 
-    input_items = sys.stdin.read().splitlines()
-
     terminal_file = open("/dev/tty")
     os.dup2(terminal_file.fileno(), 0)
 
-    redraw(window)
-
     while True:
+        filter_items()
+        redraw(window)
+
         char = window.get_wch()
         if char == curses.KEY_RESIZE:
             y, x = window.getmaxyx()
@@ -64,7 +75,5 @@ def main(window):
             continue
         else:
             query_text += char
-
-        redraw(window)
 
 curses.wrapper(main)
