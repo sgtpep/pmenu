@@ -6,6 +6,7 @@ import signal
 import difflib
 import curses
 import argparse
+import fileinput
 
 required_version = (3, 3)
 if sys.version_info < required_version:
@@ -69,20 +70,37 @@ def parse_args():
 
     return parser.parse_args()
 
-def process_input_items():
-    global input_items
-
+def get_mru_path():
     if not args.name:
         return
 
     cache_dir = os.environ.get('XDG_CACHE_HOME', os.path.join(os.path.expanduser('~'), '.cache'))
-    pmenu_dir = os.path.join(cache_dir, 'pmenu')
-    os.makedirs(pmenu_dir, exist_ok=True)
-    pmenu_path = os.path.join(pmenu_dir, args.name)
-    if os.path.exists(pmenu_path):
-        cache_items = open(pmenu_path).read().splitlines()
-        cache_items = [i for i in cache_items if i in input_items]
-        input_items = cache_items + [i for i in input_items if i not in cache_items]
+    mru_dir = os.path.join(cache_dir, 'pmenu')
+    os.makedirs(mru_dir, exist_ok=True)
+
+    return os.path.join(mru_dir, args.name)
+
+def process_mru_items():
+    global input_items
+
+    if not mru_path or not os.path.exists(mru_path):
+        return
+
+    cache_items = open(mru_path).read().splitlines()
+    cache_items = [i for i in cache_items if i in input_items]
+    cache_items.reverse()
+
+    input_items = cache_items + [i for i in input_items if i not in cache_items]
+
+def add_mru_item(mru_item):
+    with fileinput.input(mru_path, inplace=True) as cache_file:
+        for cache_line in cache_file:
+            cache_item = cache_line.rstrip("\n\r")
+            if cache_item != mru_item and cache_item in input_items:
+                print(cache_item)
+
+    with open(mru_path, 'a') as cache_file:
+        cache_file.write(mru_item)
 
 def main(window):
     global query_text, selection_index
@@ -129,15 +147,20 @@ def main(window):
             query_text += char
 
         selection_index = 0
+
         filter_items()
         redraw(window)
 
 args = parse_args()
-process_input_items()
+mru_path = get_mru_path()
+process_mru_items()
 
 curses.wrapper(main)
 
 if selection_index < len(filtered_items) - 1:
-    print(filtered_items[selection_index][0])
+    selected_item = filtered_items[selection_index][0]
+    add_mru_item(selected_item)
+
+    print(selected_item)
 else:
     print(query_text)
