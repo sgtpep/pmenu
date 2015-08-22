@@ -42,16 +42,15 @@ def filter_items():
 def redraw(screen):
     screen.erase()
 
-    screen.addstr(args.prompt)
-
     for i, filtered_item in enumerate(filtered_items[:curses.LINES - 1]):
         item_attr = curses.A_REVERSE if i == selection_index else curses.A_NORMAL
         screen.insstr(i + 1, 0, filtered_item[0][:curses.COLS], item_attr)
 
-    query_text_offset = len(query_text) - (curses.COLS - len(args.prompt) - 1)
-    if query_text_offset < 0:
-        query_text_offset = 0
-    screen.addstr(0, len(args.prompt), query_text[query_text_offset:])
+    command_text = args.prompt + query_text
+    command_text_offset = len(command_text) - (curses.COLS - 1)
+    if command_text_offset < 0:
+        command_text_offset = 0
+    screen.addstr(0, 0, command_text[command_text_offset:])
 
     screen.refresh()
 
