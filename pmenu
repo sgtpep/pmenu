@@ -25,7 +25,7 @@ def filter_items():
     global filtered_items
 
     filtered_items = []
-    query_text_regex = re.compile(r".*".join(re.escape(c) for c in query_text), flags=re.IGNORECASE)
+    query_text_regex = re.compile(r".*".join(re.escape(c) for c in query_text), flags=re.I)
     for input_item in input_items:
         if query_text and not query_text_regex.search(input_item):
             continue
