@@ -12,7 +12,6 @@ required_version = (3, 3)
 if sys.version_info < required_version:
     sys.exit("Python {}.{} or newer is required.".format(*required_version))
 
-prompt_text = "> "
 query_text = ''
 input_items = sys.stdin.read().splitlines()
 filtered_items = []
@@ -43,16 +42,16 @@ def filter_items():
 def redraw(screen):
     screen.erase()
 
-    screen.addstr(prompt_text)
+    screen.addstr(args.prompt)
 
     for i, filtered_item in enumerate(filtered_items[:curses.LINES - 1]):
         item_attr = curses.A_REVERSE if i == selection_index else curses.A_NORMAL
         screen.insstr(i + 1, 0, filtered_item[0][:curses.COLS], item_attr)
 
-    query_text_offset = len(query_text) - (curses.COLS - len(prompt_text) - 1)
+    query_text_offset = len(query_text) - (curses.COLS - len(args.prompt) - 1)
     if query_text_offset < 0:
         query_text_offset = 0
-    screen.addstr(0, len(prompt_text), query_text[query_text_offset:])
+    screen.addstr(0, len(args.prompt), query_text[query_text_offset:])
 
     screen.refresh()
 
@@ -67,6 +66,7 @@ def change_selection(new_selection_index):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', '--name', help="MRU list name")
+    parser.add_argument('-p', '--prompt', default="> ", help="prompt text")
 
     return parser.parse_args()
 
