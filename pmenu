@@ -100,7 +100,7 @@ def add_mru_item(mru_item):
         with fileinput.input(mru_path, inplace=True) as cache_file:
             for cache_line in cache_file:
                 cache_item = cache_line.rstrip("\n\r")
-                if cache_item != mru_item and cache_item in input_items:
+                if cache_item != mru_item:
                     print(cache_item)
 
     with open(mru_path, 'a') as cache_file:
