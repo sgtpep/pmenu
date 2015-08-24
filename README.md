@@ -2,17 +2,18 @@
 Dynamic menu like dmenu written in Python without dependencies with optional MRU list.
 
 ## Alternatives
-- [dmenu](http://tools.suckless.org/dmenu/), C
-- [slmenu](https://bitbucket.org/rafaelgg/slmenu), C
-- [percol](https://github.com/mooz/percol), Python
-- [fzf](https://github.com/junegunn/fzf), Go
-- [Pick](https://github.com/thoughtbot/pick), C
-- [Selecta](https://github.com/garybernhardt/selecta), Ruby
-- [PathPicker](https://facebook.github.io/PathPicker/), Python
-- [happyfinder](https://github.com/hugows/hf), Go
-- [Heatseeker](https://github.com/rschmitt/heatseeker), Rust
-- [CtrlP](http://kien.github.io/ctrlp.vim/), VIM
-- [Unite](https://github.com/Shougo/unite.vim), VIM
+- [dmenu](http://tools.suckless.org/dmenu/), C/X11
+- [rofi](https://github.com/DaveDavenport/rofi) C/X11
+- [slmenu](https://bitbucket.org/rafaelgg/slmenu), C/terminal
+- [percol](https://github.com/mooz/percol), Python/terminal
+- [fzf](https://github.com/junegunn/fzf), Go/terminal
+- [Pick](https://github.com/thoughtbot/pick), C/terminal
+- [Selecta](https://github.com/garybernhardt/selecta), Ruby/terminal
+- [PathPicker](https://facebook.github.io/PathPicker/), Python/terminal
+- [happyfinder](https://github.com/hugows/hf), Go/terminal
+- [Heatseeker](https://github.com/rschmitt/heatseeker), Rust/terminal
+- [CtrlP](http://kien.github.io/ctrlp.vim/), Vimscript/Vim
+- [Unite](https://github.com/Shougo/unite.vim), Vimscript/Vim
 
 ## Usage
 
