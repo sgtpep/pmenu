@@ -177,7 +177,7 @@ def main(screen):
         filtered_items = get_filtered_items()
         redraw(screen)
 
-    if selection_index < len(filtered_items):
+    if len(filtered_items):
         return True, filtered_items[selection_index][0]
     else:
         return False, query_text
@@ -189,8 +189,9 @@ def add_mru_text(mru_text):
     if os.path.exists(mru_path):
         with fileinput.input(mru_path, inplace=True) as mru_file:
             for mru_line in mru_file:
-                if mru_line.rstrip("\n\r") != mru_text:
-                    print(mru_line, end='')
+                mru_line_text = mru_line.rstrip("\n\r") 
+                if mru_line_text != mru_text:
+                    print(mru_line_text)
 
     with open(mru_path, 'a') as mru_file:
         mru_file.write(mru_text)
@@ -201,6 +202,6 @@ if __name__ == '__main__':
     input_items = get_input_items()
 
     is_existing_item, selection_text = redirect_stdio(lambda: curses_wrapper(main))
-    if not is_existing_item:
+    if is_existing_item:
         add_mru_text(selection_text)
     print(selection_text)
