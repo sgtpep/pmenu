@@ -173,7 +173,7 @@ def main(screen):
 
             continue
 
-        elif len(keyname_string) == 2:
+        elif len(keyname_string) == 2 and keyname_string[0] == '^'
             continue
 
         else:
