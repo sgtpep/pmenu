@@ -17,9 +17,15 @@ signal.signal(signal.SIGINT, lambda *args: sys.exit(130))
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', '--name', help="MRU list name")
-    parser.add_argument('-p', '--prompt', default="> ", help="prompt text")
+    parser.add_argument('-p', '--prompt', help="prompt text")
 
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args.prompt is None:
+        args.prompt = "> "
+        if args.name:
+            args.prompt = args.name + args.prompt
+
+    return args
 
 def get_mru_path():
     if not args.name:
