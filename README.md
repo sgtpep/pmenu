@@ -47,7 +47,14 @@ Pick some file from current directory for editing from VIM by Ctrl-P (ala CtrlP)
 
 ## pmenu-run
 
-The script `pmenu-run` is an example of application launcher built with `pmenu` similar to `dmenu_run` and `gmrun`. It scans for the aplication commands in \*.desktop files, detects if they are intended for terminal and automatically run them attached or detached to the it.
+The script `pmenu-run` is an example of application launcher built with `pmenu` similar to `dmenu_run`, `gmrun` and `bashrun`. It scans for the aplication commands in \*.desktop files, detects if they are intended for terminal and automatically run them attached or detached to the it.
+
+Bind some desktop shortcut to one the following commands depending of what terminal emulator you use:
+
+    xterm -e pmenu-run
+    urxvt -e bash -i -c "pmenu-run; :"
+
+`pmenu-run` passes all provided options to `pmenu`. This could be used to add more items to application launcher, like `pmenu-run command1 command2 command3`.
 
 ## Alternatives
 - [dmenu](http://tools.suckless.org/dmenu/), C/X11
