@@ -15,7 +15,8 @@ if sys.version_info < required_version:
 signal.signal(signal.SIGINT, lambda *args: sys.exit(130))
 
 def get_args():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(usage="pipe menu items to stdin or pass them with as positional arguments")
+    parser.add_argument('item', nargs='*', help="menu item text")
     parser.add_argument('-n', '--name', help="name of the usage cache")
     parser.add_argument('-p', '--prompt', help="prompt text")
 
@@ -38,7 +39,10 @@ def get_mru_path():
     return os.path.join(mru_dir, args.name)
 
 def get_input_items():
-    input_item_texts = sys.stdin.read().splitlines()
+    input_item_texts = []
+    if not sys.stdin.isatty():
+        input_item_texts += sys.stdin.read().splitlines()
+    input_item_texts += args.item
 
     if mru_path and os.path.exists(mru_path):
         mru_item_texts = open(mru_path).read().splitlines()
