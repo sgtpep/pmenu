@@ -1,5 +1,5 @@
 # pmenu
-Dynamic menu like dmenu written in Python without dependencies with optional MRU list.
+Dynamic menu like dmenu written in Python without dependencies with optional sorting by usage.
 
 ## Alternatives
 - [dmenu](http://tools.suckless.org/dmenu/), C/X11
