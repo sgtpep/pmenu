@@ -16,7 +16,7 @@ signal.signal(signal.SIGINT, lambda *args: sys.exit(130))
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-n', '--name', help="MRU list name")
+    parser.add_argument('-n', '--name', help="name of the usage cache")
     parser.add_argument('-p', '--prompt', help="prompt text")
 
     args = parser.parse_args()
