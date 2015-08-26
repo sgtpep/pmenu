@@ -7,10 +7,9 @@ desktop_dirs=(${XDG_DATA_HOME-~/.local/share}/applications /usr/share/applicatio
 desktop_paths=(`find "${desktop_dirs[@]}" -type f -name "*.desktop" ! -name "chrome-*-*.desktop" 2>/dev/null || :`)
 desktop_names=("${desktop_paths[@]##*/}")
 desktop_names=("${desktop_names[@]%.desktop}")
-pmenu_input="${desktop_names[*]}$'\n'$*"
 IFS=$prev_ifs
 
-result=`IFS=$'\n'; echo "$pmenu_input" | sort -u | pmenu -n run`
+result=`IFS=$'\n'; echo "${desktop_names[*]}" | sort -u | pmenu -n run "$@"`
 
 for i in ${!desktop_names[@]}; do
   [[ ${desktop_names[$i]} == $result ]] || continue
