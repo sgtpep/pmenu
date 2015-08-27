@@ -69,6 +69,9 @@ def redirect_stdio(func):
         os.dup2(prev_stdout, 1)
 
 def curses_wrapper(func):
+    if 'ESCDELAY' not in os.environ:
+        os.environ['ESCDELAY'] = '0'
+
     is_vim = os.environ.get('VIM')
     try:
         screen = curses.initscr()
@@ -139,7 +142,6 @@ def main(screen):
     redraw(screen)
 
     while True:
-
         char = screen.get_wch()
         keyname = curses.keyname(char).decode('utf8') if isinstance(char, int) else None
         keyname_string = curses.keyname(ord(char)).decode('utf8') if isinstance(char, str) else None
@@ -160,7 +162,7 @@ def main(screen):
         elif char == '\n':
             break
 
-        elif keyname_string == '^G':
+        elif keyname_string in ['^[', '^G']:
             sys.exit(130)
 
         elif keyname_string == '^U':
