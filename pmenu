@@ -46,12 +46,12 @@ def get_input_items():
 
     if mru_path and os.path.exists(mru_path):
         mru_item_texts = open(mru_path).read().splitlines()
-        mru_items = [(i, 1) for i in mru_item_texts if i in input_item_texts]
+        mru_items = [(i, 1, True) for i in mru_item_texts if i in input_item_texts]
         mru_items.reverse()
 
-        input_items = mru_items + [(i, 0) for i in input_item_texts if i not in mru_item_texts]
+        input_items = mru_items + [(i, 0, False) for i in input_item_texts if i not in mru_item_texts]
     else:
-        input_items = [(i, 0) for i in input_item_texts]
+        input_items = [(i, 0, False) for i in input_item_texts]
 
     return input_items
 
@@ -96,11 +96,11 @@ def curses_wrapper(func):
 def get_filtered_items():
     filtered_items = []
     query_text_regex = re.compile(r".*".join(re.escape(c) for c in query_text), flags=re.I)
-    for input_item_text, input_item_score in input_items:
+    for input_item_text, input_item_score, is_mru_item in input_items:
         if query_text and not query_text_regex.search(input_item_text):
             continue
 
-        if query_text:
+        if query_text and not is_mru_item:
             input_item_score += difflib.SequenceMatcher(None, input_item_text, query_text).quick_ratio()
         filtered_items.append((input_item_text, input_item_score))
 
