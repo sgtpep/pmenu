@@ -3,7 +3,6 @@ import os
 import sys
 import re
 import signal
-import difflib
 import curses
 import argparse
 import fileinput
@@ -46,12 +45,12 @@ def get_input_items():
 
     if mru_path and os.path.exists(mru_path):
         mru_item_texts = open(mru_path).read().splitlines()
-        mru_items = [(i, 1, True) for i in mru_item_texts if i in input_item_texts]
+        mru_items = [(i, 1) for i in mru_item_texts if i in input_item_texts]
         mru_items.reverse()
 
-        input_items = mru_items + [(i, 0, False) for i in input_item_texts if i not in mru_item_texts]
+        input_items = mru_items + [(i, 0) for i in input_item_texts if i not in mru_item_texts]
     else:
-        input_items = [(i, 0, False) for i in input_item_texts]
+        input_items = [(i, 0) for i in input_item_texts]
 
     return input_items
 
@@ -94,17 +93,24 @@ def curses_wrapper(func):
                 curses.endwin()
 
 def get_filtered_items():
-    filtered_items = []
-    query_text_regex = re.compile(r".*".join(re.escape(c) for c in query_text), flags=re.I)
-    for input_item_text, input_item_score, is_mru_item in input_items:
-        if query_text and not query_text_regex.search(input_item_text):
-            continue
+    if not query_text:
+        filtered_items = input_items
+    else:
+        filtered_items = []
+        query_regexes = [
+            re.compile(r"(^|[^\w])" + re.escape(query_text), flags=re.I),
+            re.compile(re.escape(query_text), flags=re.I),
+            re.compile(r".*".join(re.escape(c) for c in query_text), flags=re.I),
+        ]
+        for input_item_text, input_item_score in input_items:
+            is_filtered = False
+            for i, query_regex in enumerate(query_regexes):
+                if not query_regex.search(input_item_text):
+                    continue
 
-        if query_text and not is_mru_item:
-            input_item_score += difflib.SequenceMatcher(None, input_item_text, query_text).quick_ratio()
-        filtered_items.append((input_item_text, input_item_score))
-
-    if query_text:
+                input_item_score += len(query_regexes) - i
+                filtered_items.append((input_item_text, input_item_score))
+                break
         filtered_items = sorted(filtered_items, key=lambda filtered_item: filtered_item[1], reverse=True)
 
     return filtered_items
