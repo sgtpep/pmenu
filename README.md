@@ -58,6 +58,8 @@ Bind some desktop shortcut to one the following commands depending of what termi
 
 ## Alternatives
 - [dmenu](http://tools.suckless.org/dmenu/), C/X11
+  - [Yeganesh](http://dmwit.com/yeganesh/), Haskel
+  - [yegonesh](https://github.com/klowner/yegonesh), Go
 - [rofi](https://github.com/DaveDavenport/rofi) C/X11
 - [slmenu](https://bitbucket.org/rafaelgg/slmenu), C/terminal
 - [percol](https://github.com/mooz/percol), Python/terminal
