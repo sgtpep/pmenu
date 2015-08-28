@@ -22,7 +22,7 @@ Dynamic menu like dmenu for terminal written in Python without dependencies with
 - `Ctrl-P`: select the previous match
 - `Ctrl-U`: delete the entire line
 - `Ctrl-W`: delete the word before the cursor
-- 'Ctrl-J`, `Ctrl-M`, `Enter`: quit and output the selected item
+- `Ctrl-J`, `Ctrl-M`, `Enter`: quit and output the selected item
 
 ## Usage Examples
 
