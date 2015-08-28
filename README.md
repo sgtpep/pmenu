@@ -1,5 +1,5 @@
 # pmenu
-Dynamic menu like dmenu written in Python without dependencies with optional sorting by usage.
+Dynamic menu like dmenu for terminal written in Python without dependencies with optional sorting by usage.
 
 ## Usage
 
