@@ -1,7 +1,7 @@
 # pmenu
 Dynamic menu like dmenu for terminal written in Python without dependencies with optional sorting by usage and application launcher pmenu-run.
 
-## Usage
+## Basic Usage
 
     usage: pipe menu items to stdin or pass them with as positional arguments
 
@@ -13,6 +13,18 @@ Dynamic menu like dmenu for terminal written in Python without dependencies with
       -n NAME, --name NAME  name of the usage cache
       -p PROMPT, --prompt PROMPT
                             prompt text
+
+## Keyboard Shortcuts
+
+- `Ctrl-C`, `Ctrl-G`, `Ctrl-[`, `Escape`: quit without selecting a match
+- `Ctrl-H`, `Backspace`: delete the character before the cursor
+- `Ctrl-N`: select the next match
+- `Ctrl-P`: select the previous match
+- `Ctrl-U`: delete the entire line
+- `Ctrl-W`: delete the word before the cursor
+- 'Ctrl-J`, `Ctrl-M`, `Enter`: quit and output the selected item
+
+## Usage Examples
 
 Display some arbitrary menu items:
 
