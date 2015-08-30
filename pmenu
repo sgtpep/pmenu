@@ -97,9 +97,9 @@ def get_filtered_items():
     if not query_text:
         filtered_items = input_items
     else:
-        filtered_items1 = []
-        filtered_items2 = []
-        filtered_items3 = []
+        exact_matched_items = []
+        prefix_matched_items = []
+        substring_matched_items = []
         query_words = re.split(r"\s+", query_text)
         for input_item in input_items:
             is_matched = True
@@ -111,12 +111,12 @@ def get_filtered_items():
                 continue
 
             if input_item == query_words[0]:
-                filtered_items1.append(input_item)
+                exact_matched_items.append(input_item)
             elif not input_item.find(query_words[0]):
-                filtered_items2.append(input_item)
+                prefix_matched_items.append(input_item)
             else:
-                filtered_items3.append(input_item)
-        filtered_items = filtered_items1 + filtered_items2 + filtered_items3
+                substring_matched_items.append(input_item)
+        filtered_items = exact_matched_items + prefix_matched_items + substring_matched_items
 
     return filtered_items
 
