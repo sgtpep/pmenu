@@ -38,19 +38,17 @@ def get_mru_path():
     return os.path.join(mru_dir, args.name)
 
 def get_input_items():
-    input_item_texts = []
+    input_items = []
     if not sys.stdin.isatty():
-        input_item_texts += sys.stdin.read().splitlines()
-    input_item_texts += args.item
+        input_items += sys.stdin.read().splitlines()
+    input_items += args.item
 
     if mru_path and os.path.exists(mru_path):
-        mru_item_texts = open(mru_path).read().splitlines()
-        mru_items = [(i, 1) for i in mru_item_texts if i in input_item_texts]
+        mru_items = open(mru_path).read().splitlines()
+        mru_items = [i for i in mru_items if i in input_items]
         mru_items.reverse()
 
-        input_items = mru_items + [(i, 0) for i in input_item_texts if i not in mru_item_texts]
-    else:
-        input_items = [(i, 0) for i in input_item_texts]
+        input_items = mru_items + [i for i in input_items if i not in mru_items]
 
     return input_items
 
@@ -99,22 +97,26 @@ def get_filtered_items():
     if not query_text:
         filtered_items = input_items
     else:
-        filtered_items = []
-        query_regexes = [
-            re.compile(r"(^|[^\w])" + re.escape(query_text), flags=re.I),
-            re.compile(re.escape(query_text), flags=re.I),
-            re.compile(r".*".join(re.escape(c) for c in query_text), flags=re.I),
-        ]
-        for input_item_text, input_item_score in input_items:
-            is_filtered = False
-            for i, query_regex in enumerate(query_regexes):
-                if not query_regex.search(input_item_text):
-                    continue
+        filtered_items1 = []
+        filtered_items2 = []
+        filtered_items3 = []
+        query_words = re.split(r"\s+", query_text)
+        for input_item in input_items:
+            is_matched = True
+            for query_word in query_words:
+                if query_word and query_word not in input_item:
+                    is_matched = False
+                    break
+            if not is_matched:
+                continue
 
-                input_item_score += len(query_regexes) - i
-                filtered_items.append((input_item_text, input_item_score))
-                break
-        filtered_items = sorted(filtered_items, key=lambda filtered_item: filtered_item[1], reverse=True)
+            if input_item == query_words[0]:
+                filtered_items1.append(input_item)
+            elif not input_item.find(query_words[0]):
+                filtered_items2.append(input_item)
+            else:
+                filtered_items3.append(input_item)
+        filtered_items = filtered_items1 + filtered_items2 + filtered_items3
 
     return filtered_items
 
@@ -123,7 +125,7 @@ def redraw(screen):
 
     for i, filtered_item in enumerate(filtered_items[:curses.LINES - 1]):
         item_attr = curses.A_REVERSE if i == selection_index else curses.A_NORMAL
-        screen.insstr(i + 1, 0, filtered_item[0][:curses.COLS], item_attr)
+        screen.insstr(i + 1, 0, filtered_item[:curses.COLS], item_attr)
 
     top_line_text = args.prompt + query_text
     top_line_offset = len(top_line_text) - (curses.COLS - 1)
@@ -196,7 +198,7 @@ def main(screen):
         redraw(screen)
 
     if len(filtered_items):
-        return True, filtered_items[selection_index][0]
+        return True, filtered_items[selection_index]
     else:
         return False, query_text
 
