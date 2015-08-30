@@ -69,17 +69,30 @@ Bind some desktop shortcut to one the following commands depending of what termi
 `pmenu-run` passes all provided options to `pmenu`. This could be used to add more items to application launcher, like `pmenu-run command1 command2 command3`.
 
 ## Alternatives
-- [dmenu](http://tools.suckless.org/dmenu/), C/X11
-  - [Yeganesh](http://dmwit.com/yeganesh/), Haskel
-  - [yegonesh](https://github.com/klowner/yegonesh), Go
-- [rofi](https://github.com/DaveDavenport/rofi) C/X11
-- [slmenu](https://bitbucket.org/rafaelgg/slmenu), C/terminal
-- [percol](https://github.com/mooz/percol), Python/terminal
-- [fzf](https://github.com/junegunn/fzf), Go/terminal
-- [Pick](https://github.com/thoughtbot/pick), C/terminal
-- [Selecta](https://github.com/garybernhardt/selecta), Ruby/terminal
-- [PathPicker](https://facebook.github.io/PathPicker/), Python/terminal
-- [happyfinder](https://github.com/hugows/hf), Go/terminal
-- [Heatseeker](https://github.com/rschmitt/heatseeker), Rust/terminal
-- [CtrlP](http://kien.github.io/ctrlp.vim/), Vimscript/Vim
-- [Unite](https://github.com/Shougo/unite.vim), Vimscript/Vim
+
+- [dmenu](http://tools.suckless.org/dmenu/), C, X11
+- [rofi](https://github.com/DaveDavenport/rofi) C, X11
+- [slmenu](https://bitbucket.org/rafaelgg/slmenu), C, terminal
+- [percol](https://github.com/mooz/percol), Python, terminal
+- [fzf](https://github.com/junegunn/fzf), Go, terminal
+- [Pick](https://github.com/thoughtbot/pick), C, terminal
+- [Selecta](https://github.com/garybernhardt/selecta), Ruby, terminal
+- [PathPicker](https://facebook.github.io/PathPicker/), Python, terminal
+- [happyfinder](https://github.com/hugows/hf), Go, terminal
+- [Heatseeker](https://github.com/rschmitt/heatseeker), Rust, terminal
+- [CtrlP](http://kien.github.io/ctrlp.vim/), Vimscript, Vim
+- [Unite](https://github.com/Shougo/unite.vim), Vimscript, Vim
+
+### dmenu Wrappers
+
+- [Yeganesh](http://dmwit.com/yeganesh/), Haskel
+- [yegonesh](https://github.com/klowner/yegonesh), Go
+- [xboomx](https://github.com/victorhaggqvist/xboomx), Python
+
+### Application Launchers
+
+- [dmenu\_run](http://tools.suckless.org/dmenu/), Shell, X11
+- [gmrun](http://sourceforge.net/projects/gmrun/), C, X11
+- [bashrun](http://bashrun.sourceforge.net/), Bash, terminal
+- [bashrun2](http://henning-bekel.de/bashrun2/), Bash, terminal
+- [xboomx](https://github.com/victorhaggqvist/xboomx), Python, X11
