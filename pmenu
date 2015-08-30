@@ -158,11 +158,19 @@ def main(screen):
         elif char == '\b' or keyname == 'KEY_BACKSPACE':
             query_text = query_text[:-1]
 
-        elif isinstance(char, int):
+        elif keyname == 'KEY_DOWN' or keyname_string == '^N':
+            if selection_index < min(len(filtered_items), curses.LINES - 1) - 1:
+                selection_index += 1
+            redraw(screen)
+
             continue
 
-        elif char == '\n':
-            break
+        elif keyname == 'KEY_UP' or keyname_string == '^P':
+            if selection_index > 0:
+                selection_index -= 1
+            redraw(screen)
+
+            continue
 
         elif keyname_string in ['^[', '^G']:
             sys.exit(130)
@@ -173,19 +181,11 @@ def main(screen):
         elif keyname_string == '^W':
             query_text = re.sub(r"\w*[^\w]*$", '', query_text)
 
-        elif keyname_string == '^N':
-            if selection_index < min(len(filtered_items), curses.LINES - 1) - 1:
-                selection_index += 1
-            redraw(screen)
-
+        elif isinstance(char, int):
             continue
 
-        elif keyname_string == '^P':
-            if selection_index > 0:
-                selection_index -= 1
-            redraw(screen)
-
-            continue
+        elif char == '\n':
+            break
 
         elif len(keyname_string) == 2 and keyname_string[0] == '^':
             continue

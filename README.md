@@ -23,8 +23,8 @@ Python 3.3.
 - `Ctrl-C`, `Ctrl-G`, `Ctrl-[`, `Escape`: quit without selecting a match
 - `Ctrl-H`, `Backspace`: delete the character before the cursor
 - `Ctrl-J`, `Ctrl-M`, `Enter`: quit and output the selected item
-- `Ctrl-N`: select the next match
-- `Ctrl-P`: select the previous match
+- `Ctrl-N`, 'Down': select the next match
+- `Ctrl-P`, 'Up': select the previous match
 - `Ctrl-U`: delete the entire line
 - `Ctrl-W`: delete the word before the cursor
 
