@@ -75,6 +75,7 @@ Bind some desktop shortcut to one the following commands depending of what termi
 ## Alternatives
 
 - [dmenu](http://tools.suckless.org/dmenu/), C, X11
+- [dmenu2](https://bitbucket.org/melek/dmenu2), C, X11
 - [rofi](https://github.com/DaveDavenport/rofi) C, X11
 - [slmenu](https://bitbucket.org/rafaelgg/slmenu), C, terminal
 - [percol](https://github.com/mooz/percol), Python, terminal
@@ -86,6 +87,7 @@ Bind some desktop shortcut to one the following commands depending of what termi
 - [Heatseeker](https://github.com/rschmitt/heatseeker), Rust, terminal
 - [CtrlP](http://kien.github.io/ctrlp.vim/), Vimscript, Vim
 - [Unite](https://github.com/Shougo/unite.vim), Vimscript, Vim
+- [FuzzyFinder](http://www.vim.org/scripts/script.php?script_id=1984), Vimscript, Vim
 
 ### dmenu Wrappers
 
