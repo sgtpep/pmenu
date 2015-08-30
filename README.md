@@ -1,6 +1,10 @@
 # pmenu
 Dynamic menu like dmenu for terminal written in Python without dependencies with optional sorting by usage and application launcher pmenu-run.
 
+## Requirements
+
+Python 3.3.
+
 ## Basic Usage
 
     usage: pipe menu items to stdin or pass them with as positional arguments
