@@ -97,22 +97,28 @@ def get_filtered_items():
     if not query_text:
         filtered_items = input_items
     else:
+        query_words = re.split(r"\s+", query_text)
+        query_regexes = [re.compile(re.escape(i), re.I) for i in query_words if i]
+
         exact_matched_items = []
         prefix_matched_items = []
         substring_matched_items = []
-        query_words = re.split(r"\s+", query_text)
         for input_item in input_items:
             is_matched = True
-            for query_word in query_words:
-                if query_word and query_word not in input_item:
+            first_match = None
+            for i, query_regex in enumerate(query_regexes):
+                match = re.search(query_regex, input_item)
+                if not match:
                     is_matched = False
                     break
+                elif not i:
+                    first_match = match.group(0)
             if not is_matched:
                 continue
 
-            if input_item == query_words[0]:
+            if input_item == first_match:
                 exact_matched_items.append(input_item)
-            elif not input_item.find(query_words[0]):
+            elif not input_item.find(first_match):
                 prefix_matched_items.append(input_item)
             else:
                 substring_matched_items.append(input_item)
