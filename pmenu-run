@@ -17,13 +17,17 @@ for i in ${!desktop_names[@]}; do
   desktop_path=${desktop_paths[$i]}
   break
 done
-[[ -n ${desktop_path-} ]] || exec $result
 
-desktop_exec=`grep -oP -m 1 "(?<=^Exec=).+" "$desktop_path"`
-desktop_exec=${desktop_exec// -[[:alnum:]]* %[[:alpha:]]/}
-desktop_exec=${desktop_exec// %[[:alpha:]]/}
-if grep -q ^Terminal=true "$desktop_path"; then
-  exec $desktop_exec
+if [[ ! ${desktop_path-} ]]; then
+  terminal_cmd=$result
 else
-  exec setsid $desktop_exec
+  desktop_exec=`grep -oP -m 1 "(?<=^Exec=).+" "$desktop_path"`
+  desktop_exec=${desktop_exec// -[[:alnum:]]* %[[:alpha:]]/}
+  desktop_exec=${desktop_exec// %[[:alpha:]]/}
+  grep -q ^Terminal=true "$desktop_path" || exec setsid $desktop_exec
+
+  terminal_cmd=$desktop_exec
 fi
+
+printf "\e]0;${terminal_cmd%% *}\a"
+exec $terminal_cmd
