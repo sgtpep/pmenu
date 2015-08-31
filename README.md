@@ -22,6 +22,7 @@ Python 3.3.
 
 - `Ctrl-C`, `Ctrl-G`, `Ctrl-[`, `Escape`: quit without selecting a match
 - `Ctrl-H`, `Backspace`: delete the character before the cursor
+- `Ctrl-I`, `Tab`: complete the selected item
 - `Ctrl-J`, `Ctrl-M`, `Enter`: quit and output the selected item
 - `Ctrl-N`, 'Down': select the next match
 - `Ctrl-P`, 'Up': select the previous match

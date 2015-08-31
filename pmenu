@@ -187,13 +187,17 @@ def main(screen):
         elif keyname_string == '^W':
             query_text = re.sub(r"\w*[^\w]*$", '', query_text)
 
-        elif isinstance(char, int):
-            continue
-
         elif char == '\n':
             break
 
-        elif len(keyname_string) == 2 and keyname_string[0] == '^':
+        elif char == '\t':
+            if filtered_items:
+                query_text = filtered_items[0]
+
+        elif isinstance(char, int):
+            continue
+
+        elif len(keyname_string) > 1 and keyname_string[0] == '^':
             continue
 
         else:
@@ -203,7 +207,7 @@ def main(screen):
         filtered_items = get_filtered_items()
         redraw(screen)
 
-    if len(filtered_items):
+    if filtered_items:
         return True, filtered_items[selection_index]
     else:
         return False, query_text
