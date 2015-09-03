@@ -103,3 +103,4 @@ Bind some desktop shortcut to one the following commands depending of what termi
 - [bashrun](http://bashrun.sourceforge.net/), Bash, terminal
 - [bashrun2](http://henning-bekel.de/bashrun2/), Bash, terminal
 - [xboomx](https://github.com/victorhaggqvist/xboomx), Python, X11
+- [shellex](https://github.com/Merovius/shellex), C, X11
