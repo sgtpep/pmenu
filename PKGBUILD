@@ -7,6 +7,10 @@ url=https://gitlab.com/sgtpep/pmenu
 arch=(any)
 license=(GPL3)
 depends=(python)
+optdepends=(
+  "bash: pmenu-run application launcher"
+  "grep: pmenu-run application launcher"
+)
 makedepends=(git)
 source=(git+https://gitlab.com/sgtpep/pmenu.git)
 md5sums=('SKIP')
