@@ -1,6 +1,8 @@
 # pmenu
 Dynamic menu like dmenu for terminal written in Python without dependencies with optional sorting by usage and application launcher.
 
+Discussion: https://bbs.archlinux.org/viewtopic.php?id=201674.
+
 ## Requirements
 
 Python 3.3.
