@@ -33,17 +33,17 @@ Python 3.3.
 
 ## Usage Examples
 
-Display some arbitrary menu items:
+Display some menu items:
 
     echo -e "foo\nbar\nbaz" | pmenu
     pmenu foo bar baz
     echo -e "foo\nbar" | pmenu baz qux
 
-Pick some file from current directory:
+Pick file from current directory:
 
     find -maxdepth 3 -type f ! -path "./.git/*" ! -path "./.svn/*" -printf '%P\n' | LC_COLLATE=C sort | pmenu
 
-Pick some file from current directory for editing from VIM by Ctrl-P (ala CtrlP):
+Pick file from current directory for editing in VIM using Ctrl-P shortcut (a la [CtrlP](http://kien.github.io/ctrlp.vim/) plugin):
 
     function! Pmenu()
       let mru_name = fnamemodify(getcwd(), ":t")
@@ -61,8 +61,8 @@ Pick some file from current directory for editing from VIM by Ctrl-P (ala CtrlP)
       endif
       redraw!
     endfunction
-    nnoremap <silent> <Leader>o :call Pmenu()<CR>
-    vnoremap <silent> <Leader>o :call Pmenu()<CR>
+    nnoremap <silent> <C-P> :call Pmenu()<CR>
+    vnoremap <silent> <C-P> :call Pmenu()<CR>
 
 ## pmenu-run
 
