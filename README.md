@@ -77,6 +77,8 @@ Bind some desktop shortcut to one the following commands depending of what termi
 
 ## Alternatives
 
+### dmenu-like Menus
+
 - [dmenu](http://tools.suckless.org/dmenu/), C, X11
 - [dmenu2](https://bitbucket.org/melek/dmenu2), C, X11
 - [rofi](https://github.com/DaveDavenport/rofi) C, X11
@@ -88,9 +90,6 @@ Bind some desktop shortcut to one the following commands depending of what termi
 - [PathPicker](https://facebook.github.io/PathPicker/), Python, terminal
 - [happyfinder](https://github.com/hugows/hf), Go, terminal
 - [Heatseeker](https://github.com/rschmitt/heatseeker), Rust, terminal
-- [CtrlP](http://kien.github.io/ctrlp.vim/), Vimscript, Vim
-- [Unite](https://github.com/Shougo/unite.vim), Vimscript, Vim
-- [FuzzyFinder](http://www.vim.org/scripts/script.php?script_id=1984), Vimscript, Vim
 
 ### dmenu Wrappers
 
@@ -106,3 +105,11 @@ Bind some desktop shortcut to one the following commands depending of what termi
 - [bashrun2](http://henning-bekel.de/bashrun2/), Bash, terminal
 - [xboomx](https://github.com/victorhaggqvist/xboomx), Python, X11
 - [shellex](https://github.com/Merovius/shellex), C, X11
+- [Kupfer](http://engla.github.io/kupfer/), Python, X11
+- [lighthouse](https://github.com/emgram769/lighthouse), C, X11
+
+### Vim Menus
+
+- [CtrlP](http://kien.github.io/ctrlp.vim/), Vimscript, Vim
+- [Unite](https://github.com/Shougo/unite.vim), Vimscript, Vim
+- [FuzzyFinder](http://www.vim.org/scripts/script.php?script_id=1984), Vimscript, Vim
