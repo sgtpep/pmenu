@@ -113,3 +113,9 @@ Bind some desktop shortcut to one the following commands depending of what termi
 - [CtrlP](http://kien.github.io/ctrlp.vim/), Vimscript, Vim
 - [Unite](https://github.com/Shougo/unite.vim), Vimscript, Vim
 - [FuzzyFinder](http://www.vim.org/scripts/script.php?script_id=1984), Vimscript, Vim
+
+## License and copyright
+
+The project is released under the General Public License (GPL), version 3.
+
+Copyright © 2015, Danil Semelenov.
