@@ -7,6 +7,12 @@ Discussion: https://bbs.archlinux.org/viewtopic.php?id=201674.
 
 Python 3.3.
 
+## Installation
+
+Copy `pmenu` (and optionally `pmenu-run`) to any location inside your `$PATH`, say `/usr/local/bin`.
+
+On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu/.
+
 ## Basic Usage
 
     usage: pipe menu items to stdin or pass them with as positional arguments
