@@ -73,6 +73,9 @@ def curses_wrapper(func):
     is_vim = os.environ.get('VIM')
     try:
         screen = curses.initscr()
+        if is_vim:
+            screen.refresh()
+            curses.curs_set(1)
         curses.noecho()
         curses.cbreak()
         screen.keypad(1)
@@ -80,9 +83,6 @@ def curses_wrapper(func):
             curses.start_color()
         except:
             pass
-
-        if is_vim:
-            curses.curs_set(1)
 
         return func(screen)
     finally:
