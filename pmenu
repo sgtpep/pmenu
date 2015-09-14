@@ -84,6 +84,8 @@ def curses_wrapper(func):
             curses.start_color()
         except:
             pass
+        else:
+            curses.use_default_colors()
 
         return func(screen)
     finally:
