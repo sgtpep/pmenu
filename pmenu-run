@@ -1,6 +1,15 @@
 #!/bin/bash
 set -eu -o pipefail
 
+while getopts v option; do
+  case $option in
+    v)
+      pmenu -v
+      exit
+      ;;
+  esac
+done
+
 prev_ifs=$IFS
 IFS=$'\n'
 desktop_dirs=(${XDG_DATA_HOME-~/.local/share}/applications /usr/share/applications)

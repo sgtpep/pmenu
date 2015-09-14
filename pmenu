@@ -7,6 +7,8 @@ import curses.ascii
 import argparse
 import fileinput
 
+__version__ = '0.1.1'
+
 required_version = (3, 3)
 if sys.version_info < required_version:
     sys.exit("Python {}.{} or newer is required.".format(*required_version))
@@ -16,6 +18,7 @@ def get_args():
     parser.add_argument('item', nargs='*', help="menu item text")
     parser.add_argument('-n', '--name', help="name of the usage cache")
     parser.add_argument('-p', '--prompt', help="prompt text")
+    parser.add_argument('-v', '--version', action='version', version="%(prog)s " + __version__)
 
     args = parser.parse_args()
     if args.prompt is None:
@@ -87,7 +90,10 @@ def curses_wrapper(func):
         if 'screen' in locals():
             screen.keypad(0)
             curses.echo()
-            curses.nocbreak()
+            try:
+                curses.nocbreak()
+            except curses.error:
+                pass
             if not is_vim:
                 curses.endwin()
 
@@ -151,7 +157,7 @@ def main(screen):
         try:
             char = screen.get_wch()
         except KeyboardInterrupt:
-            sys.exit(130)
+            return
         char_code = isinstance(char, str) and ord(char)
 
         if char == curses.KEY_RESIZE:
@@ -184,7 +190,7 @@ def main(screen):
 
         # ^[, ^G
         elif char_code in (curses.ascii.ESC, curses.ascii.BEL):
-            sys.exit(130)
+            return
 
         # ^U
         elif char_code == curses.ascii.NAK:
@@ -234,7 +240,11 @@ if __name__ == '__main__':
     mru_path = get_mru_path()
     input_items = get_input_items()
 
-    is_existing_item, selection_text = redirect_stdio(lambda: curses_wrapper(main))
+    result = redirect_stdio(lambda: curses_wrapper(main))
+    if not result:
+        sys.exit(130)
+
+    is_existing_item, selection_text = result
     if is_existing_item:
         add_mru_text(selection_text)
     print(selection_text)

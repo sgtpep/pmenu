@@ -25,6 +25,7 @@ On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu
       -n NAME, --name NAME  name of the usage cache
       -p PROMPT, --prompt PROMPT
                             prompt text
+      -v, --version         show program's version number and exit
 
 ## Keyboard Shortcuts
 
