@@ -56,7 +56,7 @@ Pick file from current directory for editing in VIM using Ctrl-P shortcut (a la 
       if isdirectory("./.git")
         let filelist_command = "git ls-files"
         if !empty(expand('%'))
-          let filelist_command .= " | grep -vF " . shellescape(expand("%:."), 1)
+          let filelist_command .= " | grep -vxF " . shellescape(expand("%:."), 1)
         endif
       else
         let filelist_command = "find -maxdepth 3 -type f " . shellescape("./" . expand("%:."), 1) . " ! -path '*/.git/*' ! -path '*/.svn/*' -printf '%P\n' | LC_COLLATE=C sort"
