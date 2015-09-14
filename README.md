@@ -15,7 +15,7 @@ On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu
 
 ## Basic Usage
 
-    usage: pipe menu items to stdin or pass them with as positional arguments
+    usage: pipe menu items to stdin or pass them as positional arguments
 
     positional arguments:
       item                  menu item text
