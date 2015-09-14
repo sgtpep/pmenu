@@ -62,7 +62,7 @@ Pick some file from current directory for editing in VIM using Ctrl-P shortcut (
       else
         let filelist_command = "find -maxdepth 3 -type f " . shellescape("./" . expand("%:."), 1) . " ! -path '*/.git/*' ! -path '*/.svn/*' -printf '%P\n' | LC_COLLATE=C sort"
       endif
-      let selected_paths = split(system(filelist_command . " | pmenu -n " . shellescape(mru_name, 1)), '\n') . " -p " . shellescape(mru_name . "> ", 1)
+      let selected_paths = systemlist(filelist_command . " | pmenu -n " . shellescape(mru_name, 1))
       if !empty(selected_paths)
         execute ":edit " . selected_paths[0]
       endif
