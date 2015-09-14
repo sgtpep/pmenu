@@ -46,11 +46,11 @@ Display some menu items:
     pmenu foo bar baz
     echo -e "foo\nbar" | pmenu baz qux
 
-Pick file from current directory:
+Pick some file from current directory:
 
     find -maxdepth 3 -type f ! -path "./.git/*" ! -path "./.svn/*" -printf '%P\n' | LC_COLLATE=C sort | pmenu
 
-Pick file from current directory for editing in VIM using Ctrl-P shortcut (a la [CtrlP](http://kien.github.io/ctrlp.vim/) plugin):
+Pick some file from current directory for editing in VIM using Ctrl-P shortcut (a la [CtrlP](http://kien.github.io/ctrlp.vim/) plugin):
 
     function! Pmenu()
       let mru_name = fnamemodify(getcwd(), ":t")
