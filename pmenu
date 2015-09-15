@@ -7,7 +7,7 @@ import curses.ascii
 import argparse
 import fileinput
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 required_version = (3, 3)
 if sys.version_info < required_version:
@@ -74,9 +74,6 @@ def curses_wrapper(func):
     is_vim = os.environ.get('VIM')
     try:
         screen = curses.initscr()
-        if is_vim:
-            screen.refresh()
-            curses.curs_set(1)
         curses.noecho()
         curses.cbreak()
         screen.keypad(1)
@@ -87,6 +84,9 @@ def curses_wrapper(func):
         else:
             curses.use_default_colors()
 
+        if is_vim:
+            curses.curs_set(1)
+
         return func(screen)
     finally:
         if 'screen' in locals():
@@ -96,6 +96,7 @@ def curses_wrapper(func):
                 curses.nocbreak()
             except curses.error:
                 pass
+
             if not is_vim:
                 curses.endwin()
 
