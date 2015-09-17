@@ -13,7 +13,7 @@ Copy `pmenu` (and optionally `pmenu-run`) to any location inside your `$PATH`, s
 
 On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu/.
 
-## Basic Usage
+## Basic usage
 
     usage: pipe menu items to stdin or pass them as positional arguments
 
@@ -27,7 +27,7 @@ On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu
                             prompt text
       -v, --version         show program's version number and exit
 
-## Keyboard Shortcuts
+## Keyboard shortcuts
 
 - `Ctrl-C`, `Ctrl-G`, `Ctrl-[`, `Escape`: quit without selecting a match
 - `Ctrl-H`, `Backspace`: delete the character before the cursor
@@ -38,7 +38,7 @@ On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu
 - `Ctrl-U`: delete the entire line
 - `Ctrl-W`: delete the word before the cursor
 
-## Usage Examples
+## Usage examples
 
 Display some menu items:
 
@@ -87,7 +87,7 @@ Bind some desktop shortcut to one the following commands depending of what termi
 
 ## Alternatives
 
-### dmenu-like Menus
+### dmenu-like menus
 
 - [dmenu](http://tools.suckless.org/dmenu/), C, X11
 - [dmenu2](https://bitbucket.org/melek/dmenu2), C, X11
@@ -101,13 +101,13 @@ Bind some desktop shortcut to one the following commands depending of what termi
 - [happyfinder](https://github.com/hugows/hf), Go, terminal
 - [Heatseeker](https://github.com/rschmitt/heatseeker), Rust, terminal
 
-### dmenu Wrappers
+### dmenu wrappers
 
 - [Yeganesh](http://dmwit.com/yeganesh/), Haskel
 - [yegonesh](https://github.com/klowner/yegonesh), Go
 - [xboomx](https://github.com/victorhaggqvist/xboomx), Python
 
-### Application Launchers
+### Application launchers
 
 - [dmenu\_run](http://tools.suckless.org/dmenu/), Shell, X11
 - [gmrun](http://sourceforge.net/projects/gmrun/), C, X11
@@ -118,7 +118,7 @@ Bind some desktop shortcut to one the following commands depending of what termi
 - [Kupfer](http://engla.github.io/kupfer/), Python, X11
 - [lighthouse](https://github.com/emgram769/lighthouse), C, X11
 
-### Vim Menus
+### Vim menus
 
 - [CtrlP](http://kien.github.io/ctrlp.vim/), Vimscript, Vim
 - [Unite](https://github.com/Shougo/unite.vim), Vimscript, Vim
