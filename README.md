@@ -120,9 +120,10 @@ Bind some desktop shortcut to one the following commands depending of what termi
 
 ### Vim menus
 
-- [CtrlP](http://kien.github.io/ctrlp.vim/), Vimscript, Vim
-- [Unite](https://github.com/Shougo/unite.vim), Vimscript, Vim
-- [FuzzyFinder](http://www.vim.org/scripts/script.php?script_id=1984), Vimscript, Vim
+- [CtrlP](http://kien.github.io/ctrlp.vim/)
+- [Unite](https://github.com/Shougo/unite.vim)
+- [FuzzyFinder](http://www.vim.org/scripts/script.php?script_id=1984)
+- [LeaderF](https://github.com/Yggdroot/LeaderF)
 
 ## License and copyright
 
