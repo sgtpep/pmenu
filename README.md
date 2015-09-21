@@ -92,7 +92,7 @@ Bind some desktop shortcut to one the following commands depending of what termi
 - [slmenu](https://bitbucket.org/rafaelgg/slmenu), C, terminal
 - [percol](https://github.com/mooz/percol), Python, terminal
 - [fzf](https://github.com/junegunn/fzf), Go, terminal
-- [Pick](https://github.com/thoughtbot/pick), C, terminal
+- [pick](https://github.com/thoughtbot/pick), C, terminal
 - [Selecta](https://github.com/garybernhardt/selecta), Ruby, terminal
 - [PathPicker](https://facebook.github.io/PathPicker/), Python, terminal
 - [happyfinder](https://github.com/hugows/hf), Go, terminal
@@ -121,6 +121,10 @@ Bind some desktop shortcut to one the following commands depending of what termi
 - [Unite](https://github.com/Shougo/unite.vim)
 - [FuzzyFinder](http://www.vim.org/scripts/script.php?script_id=1984)
 - [LeaderF](https://github.com/Yggdroot/LeaderF)
+- [asyncfinder.vim](https://github.com/vim-scripts/asyncfinder.vim)
+- [ku](http://www.vim.org/scripts/script.php?script_id=2337)
+- [LustyExplorer](http://www.vim.org/scripts/script.php?script_id=1890)
+- [LycosaExplorer](http://www.vim.org/scripts/script.php?script_id=3659)
 
 ## License and copyright
 
