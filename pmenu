@@ -72,6 +72,10 @@ def curses_wrapper(func):
         os.environ['ESCDELAY'] = '0'
 
     is_vim = os.environ.get('VIM')
+    if is_vim:
+        sys.stdout.write("\033[m")
+        sys.stdout.flush()
+
     try:
         screen = curses.initscr()
         curses.noecho()
