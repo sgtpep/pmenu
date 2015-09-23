@@ -43,11 +43,12 @@ def get_input_items():
     input_items = []
     if not sys.stdin.isatty():
         stdin = io.TextIOWrapper(sys.stdin.buffer, 'utf8', 'replace')
-        input_items += stdin.readlines()
+        input_items += stdin.read().splitlines()
     input_items += args.item
 
     if mru_path and os.path.exists(mru_path):
-        mru_items = open(mru_path).read().splitlines()
+        mru_file = open(mru_path, encoding='utf8', errors='replace')
+        mru_items = mru_file.read().splitlines()
         mru_items = [i for i in mru_items if i in input_items]
         mru_items.reverse()
 
