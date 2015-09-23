@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import os
-import sys
 import re
+import io
+import sys
 import curses
 import curses.ascii
 import argparse
@@ -41,7 +42,8 @@ def get_mru_path():
 def get_input_items():
     input_items = []
     if not sys.stdin.isatty():
-        input_items += sys.stdin.read().splitlines()
+        stdin = io.TextIOWrapper(sys.stdin.buffer, 'utf8', 'replace')
+        input_items += stdin.readlines()
     input_items += args.item
 
     if mru_path and os.path.exists(mru_path):
