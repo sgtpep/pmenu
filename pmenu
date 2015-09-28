@@ -46,15 +46,20 @@ def get_input_items():
         input_items += stdin.read().splitlines()
     input_items += args.item
 
-    if mru_path and os.path.exists(mru_path):
-        mru_file = open(mru_path, encoding='utf8', errors='replace')
-        mru_items = mru_file.read().splitlines()
-        mru_items = [i for i in mru_items if i in input_items]
-        mru_items.reverse()
-
-        input_items = mru_items + [i for i in input_items if i not in mru_items]
-
     return input_items
+
+def get_mru_items(mru_path, input_items):
+    if not mru_path or not os.path.exists(mru_path):
+        return []
+
+    mru_file = open(mru_path, encoding='utf8', errors='replace')
+    mru_items = mru_file.read().splitlines()
+    mru_items = [i for i in mru_items if i in input_items]
+    mru_items.reverse()
+
+    input_items[:] = [i for i in input_items if i not in mru_items]
+
+    return mru_items
 
 def redirect_stdio(func):
     try:
@@ -109,34 +114,36 @@ def curses_wrapper(func):
 
 def get_filtered_items():
     if not query_text:
-        filtered_items = input_items
+        filtered_items = mru_items + input_items
     else:
         query_words = re.split(r"\s+", query_text.strip())
         query_regexes = [re.compile(re.escape(i), re.I) for i in query_words if i]
 
-        exact_matched_items = []
-        prefix_matched_items = []
-        substring_matched_items = []
-        for input_item in input_items:
-            is_matched = True
-            first_match = None
-            for i, query_regex in enumerate(query_regexes):
-                match = re.search(query_regex, input_item)
-                if not match:
-                    is_matched = False
-                    break
-                elif not i:
-                    first_match = match.group(0)
-            if not is_matched:
-                continue
+        filtered_items = []
+        for items in mru_items, input_items:
+            exact_matched_items = []
+            prefix_matched_items = []
+            substring_matched_items = []
+            for item in items:
+                is_matched = True
+                first_match = None
+                for i, query_regex in enumerate(query_regexes):
+                    match = re.search(query_regex, item)
+                    if not match:
+                        is_matched = False
+                        break
+                    elif not i:
+                        first_match = match.group(0)
+                if not is_matched:
+                    continue
 
-            if input_item == first_match:
-                exact_matched_items.append(input_item)
-            elif first_match and not input_item.find(first_match):
-                prefix_matched_items.append(input_item)
-            else:
-                substring_matched_items.append(input_item)
-        filtered_items = exact_matched_items + prefix_matched_items + substring_matched_items
+                if item == first_match:
+                    exact_matched_items.append(item)
+                elif first_match and not item.find(first_match):
+                    prefix_matched_items.append(item)
+                else:
+                    substring_matched_items.append(item)
+            filtered_items += exact_matched_items + prefix_matched_items + substring_matched_items
 
     return filtered_items
 
@@ -231,7 +238,7 @@ def main(screen):
     else:
         return False, query_text
 
-def add_mru_text(mru_text):
+def add_mru_text(mru_path, mru_text):
     if not mru_path:
         return
 
@@ -247,8 +254,9 @@ def add_mru_text(mru_text):
 
 if __name__ == '__main__':
     args = get_args()
-    mru_path = get_mru_path()
     input_items = get_input_items()
+    mru_path = get_mru_path()
+    mru_items = get_mru_items(mru_path, input_items)
 
     result = redirect_stdio(lambda: curses_wrapper(main))
     if not result:
@@ -256,5 +264,5 @@ if __name__ == '__main__':
 
     is_existing_item, selection_text = result
     if is_existing_item:
-        add_mru_text(selection_text)
+        add_mru_text(mru_path, selection_text)
     print(selection_text)
