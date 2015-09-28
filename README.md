@@ -114,6 +114,7 @@ Bind some desktop shortcut to one the following commands depending of what termi
 - [shellex](https://github.com/Merovius/shellex), C, X11
 - [Kupfer](http://engla.github.io/kupfer/), Python, X11
 - [lighthouse](https://github.com/emgram769/lighthouse), C, X11
+- [xlauncher](https://github.com/vatriani/xlauncher), C, X11
 
 ### Vim menus
 
