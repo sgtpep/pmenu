@@ -64,7 +64,7 @@ Pick some file from current directory for editing in VIM using Ctrl-P shortcut (
       endif
       let selected_paths = systemlist(filelist_command . " | pmenu -n " . shellescape(mru_name, 1))
       if !empty(selected_paths)
-        execute ":edit " . selected_paths[0]
+        execute "edit " . selected_paths[0]
       endif
       redraw!
     endfunction
