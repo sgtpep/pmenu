@@ -71,6 +71,18 @@ Pick some file from current directory for editing in VIM using Ctrl-P shortcut (
     nnoremap <silent> <C-P> :call Pmenu()<CR>
     vnoremap <silent> <C-P> :call Pmenu()<CR>
 
+Pick the title from the markdown file and jump to it:
+
+    function! PmenuMarkdownTitle()
+      let titles = filter(getline(1, '$'), "v:val =~ '^#\\+\\s'")
+      let selected_paths = systemlist('pmenu', titles)
+      if !empty(selected_paths)
+        call search('^#\+\s' . selected_paths[0])
+      endif
+      redraw!
+    endfunction
+    nnoremap <silent> <C-T> :call PmenuMarkdownTitle()<CR>
+
 ## pmenu-run
 
 The script `pmenu-run` is an example of application launcher built with `pmenu` similar to `dmenu_run`, `gmrun` and `bashrun`. It scans for the aplication commands in \*.desktop files, detects if they are intended for terminal and automatically run them attached or detached to the it.
