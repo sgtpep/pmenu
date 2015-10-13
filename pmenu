@@ -116,33 +116,29 @@ def get_filtered_items():
     if not query_text:
         filtered_items = mru_items + input_items
     else:
-        query_words = re.split(r"\s+", query_text.strip())
-        query_regexes = [re.compile(re.escape(i), re.I) for i in query_words if i]
-
         filtered_items = []
-        for i, items in enumerate((mru_items, input_items)):
+        word_regexes = [re.escape(i) for i in re.split(r"\s+", query_text.strip()) if i]
+        exact_match_regexes = [re.compile(r'\b' + i + r'\b', re.I) for i in word_regexes]
+        prefix_match_regexes = [re.compile(r'\b' + i, re.I) for i in word_regexes]
+        substring_match_regexes = [re.compile(i, re.I) for i in word_regexes]
+        for items in (mru_items, input_items):
             exact_matched_items = []
             prefix_matched_items = []
             substring_matched_items = []
             for item in items:
-                is_matched = True
-                first_match = None
-                for i, query_regex in enumerate(query_regexes):
-                    match = re.search(query_regex, item)
-                    if not match:
-                        is_matched = False
-                        break
-                    elif not i:
-                        first_match = match.group(0)
-                if not is_matched:
+                is_substring_match = all(re.search(i, item) for i in substring_match_regexes)
+                if not is_substring_match:
                     continue
 
-                if item == first_match:
+                is_exact_match = all(re.search(i, item) for i in exact_match_regexes)
+                if is_exact_match:
                     exact_matched_items.append(item)
-                elif i > 0 and first_match and not item.find(first_match):
-                    prefix_matched_items.append(item)
                 else:
-                    substring_matched_items.append(item)
+                    is_prefix_match = all(re.search(i, item) for i in prefix_match_regexes)
+                    if is_prefix_match:
+                        prefix_matched_items.append(item)
+                    else:
+                        substring_matched_items.append(item)
             filtered_items += exact_matched_items + prefix_matched_items + substring_matched_items
 
     return filtered_items
