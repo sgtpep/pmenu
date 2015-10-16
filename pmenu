@@ -180,7 +180,7 @@ def main(screen):
 
             continue
 
-        # https://en.wikipedia.org/wiki/C0_and_C1_control_codes
+        # see https://en.wikipedia.org/wiki/C0_and_C1_control_codes
         # ^H, Backspace
         elif char_code in (curses.ascii.BS, curses.ascii.DEL) or char == curses.KEY_BACKSPACE:
             query_text = query_text[:-1]
