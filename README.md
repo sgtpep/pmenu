@@ -5,7 +5,7 @@ Discussion: https://bbs.archlinux.org/viewtopic.php?id=201674.
 
 ## Requirements
 
-Python 3.3.
+Python 3.3+.
 
 ## Installation
 
