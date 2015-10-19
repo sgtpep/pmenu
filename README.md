@@ -48,6 +48,7 @@ Display some menu items:
 
 Pick some file from current directory:
 
+    command ls /usr/bin/ | pmenu
     find -maxdepth 3 -type f ! -path "./.git/*" ! -path "./.svn/*" -printf '%P\n' | LC_COLLATE=C sort | pmenu
 
 Pick some file from current directory for editing in VIM using Ctrl-P shortcut (a la [CtrlP](http://kien.github.io/ctrlp.vim/) plugin):
