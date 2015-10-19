@@ -46,10 +46,14 @@ Display some menu items:
     pmenu foo bar baz
     echo -e "foo\nbar" | pmenu baz qux
 
+![screencast 1](https://gitlab.com/sgtpep/pmenu/raw/master/screencasts/1.gif)
+
 Pick some file from current directory:
 
     command ls /usr/bin/ | pmenu
     find -maxdepth 3 -type f ! -path "./.git/*" ! -path "./.svn/*" -printf '%P\n' | LC_COLLATE=C sort | pmenu
+
+![screencast 2](https://gitlab.com/sgtpep/pmenu/raw/master/screencasts/2.gif)
 
 Pick some file from current directory for editing in VIM using Ctrl-P shortcut (a la [CtrlP](http://kien.github.io/ctrlp.vim/) plugin):
 
@@ -71,6 +75,8 @@ Pick some file from current directory for editing in VIM using Ctrl-P shortcut (
     endfunction
     nnoremap <silent> <C-P> :call Pmenu()<CR>
     vnoremap <silent> <C-P> :call Pmenu()<CR>
+
+![screencast 3](https://gitlab.com/sgtpep/pmenu/raw/master/screencasts/3.gif)
 
 Pick the title from the markdown file and jump to it:
 
