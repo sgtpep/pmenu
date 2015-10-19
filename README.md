@@ -3,7 +3,7 @@ Dynamic menu like dmenu for terminal written in Python without dependencies with
 
 Discussion: https://bbs.archlinux.org/viewtopic.php?id=201674.
 
-## Requirements
+## Dependencies
 
 Python 3.3+.
 
