@@ -7,37 +7,6 @@ Discussion: https://bbs.archlinux.org/viewtopic.php?id=201674.
 
 Python 3.3+.
 
-## Installation
-
-Copy `pmenu` (and optionally `pmenu-run`) to any location inside your `$PATH`, say `/usr/local/bin`.
-
-On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu/.
-
-## Basic usage
-
-    usage: pipe menu items to stdin or pass them as positional arguments
-
-    positional arguments:
-      item                  menu item text
-
-    optional arguments:
-      -h, --help            show this help message and exit
-      -n NAME, --name NAME  name of the usage cache
-      -p PROMPT, --prompt PROMPT
-                            prompt text
-      -v, --version         show program's version number and exit
-
-## Keyboard shortcuts
-
-- `Ctrl-C`, `Ctrl-G`, `Ctrl-[`, `Escape`: quit without selecting a match
-- `Ctrl-H`, `Backspace`: delete the character before the cursor
-- `Ctrl-I`, `Tab`: complete the selected item
-- `Ctrl-J`, `Ctrl-M`, `Enter`: quit and output the selected item
-- `Ctrl-N`, 'Down': select the next match
-- `Ctrl-P`, 'Up': select the previous match
-- `Ctrl-U`: delete the entire line
-- `Ctrl-W`: delete the word before the cursor
-
 ## Usage examples
 
 Display some menu items:
@@ -100,6 +69,37 @@ Bind some desktop shortcut to one the following commands depending of what termi
     urxvt -title run -e bash -i -c "pmenu-run; :"
 
 `pmenu-run` passes all provided options to `pmenu`. This could be used to add more items to application launcher, like `pmenu-run command1 command2 command3`.
+
+## Installation
+
+Copy `pmenu` (and optionally `pmenu-run`) to any location inside your `$PATH`, say `/usr/local/bin`.
+
+On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu/.
+
+## Command-line interface
+
+    usage: pipe menu items to stdin or pass them as positional arguments
+
+    positional arguments:
+      item                  menu item text
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -n NAME, --name NAME  name of the usage cache
+      -p PROMPT, --prompt PROMPT
+                            prompt text
+      -v, --version         show program's version number and exit
+
+## Keyboard shortcuts
+
+- `Ctrl-C`, `Ctrl-G`, `Ctrl-[`, `Escape`: quit without selecting a match
+- `Ctrl-H`, `Backspace`: delete the character before the cursor
+- `Ctrl-I`, `Tab`: complete the selected item
+- `Ctrl-J`, `Ctrl-M`, `Enter`: quit and output the selected item
+- `Ctrl-N`, 'Down': select the next match
+- `Ctrl-P`, 'Up': select the previous match
+- `Ctrl-U`: delete the entire line
+- `Ctrl-W`: delete the word before the cursor
 
 ## Alternatives
 
