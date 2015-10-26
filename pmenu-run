@@ -28,15 +28,15 @@ for i in ${!desktop_names[@]}; do
 done
 
 if [[ ! ${desktop_path-} ]]; then
-  terminal_cmd=$result
+  cmd=$result
 else
-  desktop_exec=`grep -oP -m 1 "(?<=^Exec=).+" "$desktop_path"`
-  desktop_exec=${desktop_exec// -[[:alnum:]]* %[[:alpha:]]/}
-  desktop_exec=${desktop_exec// %[[:alpha:]]/}
-  grep -q ^Terminal=true "$desktop_path" || exec setsid $desktop_exec
-
-  terminal_cmd=$desktop_exec
+  cmd=`grep -oP -m 1 "(?<=^Exec=).+" "$desktop_path"`
+  cmd=${cmd// -[[:alnum:]]* %[[:alpha:]]/}
+  cmd=${cmd// %[[:alpha:]]/}
+  if ! grep -q ^Terminal=true "$desktop_path"; then
+    $cmd &
+    disown
+    exit
+  fi
 fi
-
-printf "\e]0;${terminal_cmd%% *}\a"
-exec $terminal_cmd
+exec $cmd
