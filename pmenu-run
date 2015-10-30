@@ -39,4 +39,6 @@ else
     exit
   fi
 fi
+
+printf "\e]0;${cmd%% *}\a"
 exec $cmd
