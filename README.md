@@ -81,13 +81,13 @@ On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu
     usage: pipe menu items to stdin or pass them as positional arguments
 
     positional arguments:
-      item                  menu item text
+      item                  a menu item's text
 
     optional arguments:
       -h, --help            show this help message and exit
-      -n NAME, --name NAME  name of the usage cache
+      -n NAME, --name NAME  a name of the usage cache
       -p PROMPT, --prompt PROMPT
-                            prompt text
+                            a prompt text
       -v, --version         show program's version number and exit
 
 ## Keyboard shortcuts
