@@ -85,7 +85,7 @@ On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu
 
     optional arguments:
       -h, --help            show this help message and exit
-      -n NAME, --name NAME  a name of the usage cache
+      -n NAME, --name NAME  a name of the usage history file
       -p PROMPT, --prompt PROMPT
                             a prompt text
       -v, --version         show program's version number and exit
