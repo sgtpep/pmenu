@@ -134,6 +134,7 @@ On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu
 - [Kupfer](http://engla.github.io/kupfer/), Python, X11
 - [lighthouse](https://github.com/emgram769/lighthouse), C, X11
 - [xlauncher](https://github.com/vatriani/xlauncher), C, X11
+- [Albert](https://github.com/ManuelSchneid3r/albert), C++, X11
 
 ### Vim menus
 
