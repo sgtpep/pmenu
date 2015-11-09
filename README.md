@@ -107,45 +107,45 @@ On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu
 
 - [dmenu](http://tools.suckless.org/dmenu/), C, X11
 - [dmenu2](https://bitbucket.org/melek/dmenu2), C, X11
+- [fzf](https://github.com/junegunn/fzf), Go, terminal
+- [happyfinder](https://github.com/hugows/hf), Go, terminal
+- [percol](https://github.com/mooz/percol), Python, terminal
+- [pick](https://github.com/thoughtbot/pick), C, terminal
 - [rofi](https://github.com/DaveDavenport/rofi) C, X11
 - [slmenu](https://bitbucket.org/rafaelgg/slmenu), C, terminal
-- [percol](https://github.com/mooz/percol), Python, terminal
-- [fzf](https://github.com/junegunn/fzf), Go, terminal
-- [pick](https://github.com/thoughtbot/pick), C, terminal
-- [Selecta](https://github.com/garybernhardt/selecta), Ruby, terminal
-- [PathPicker](https://facebook.github.io/PathPicker/), Python, terminal
-- [happyfinder](https://github.com/hugows/hf), Go, terminal
 - [Heatseeker](https://github.com/rschmitt/heatseeker), Rust, terminal
+- [PathPicker](https://facebook.github.io/PathPicker/), Python, terminal
+- [Selecta](https://github.com/garybernhardt/selecta), Ruby, terminal
 
 ### dmenu wrappers
 
-- [Yeganesh](http://dmwit.com/yeganesh/), Haskel
 - [yegonesh](https://github.com/klowner/yegonesh), Go
 - [xboomx](https://github.com/victorhaggqvist/xboomx), Python
+- [Yeganesh](http://dmwit.com/yeganesh/), Haskel
 
 ### Application launchers
 
-- [dmenu\_run](http://tools.suckless.org/dmenu/), Shell, X11
-- [gmrun](http://sourceforge.net/projects/gmrun/), C, X11
 - [bashrun](http://bashrun.sourceforge.net/), Bash, terminal
 - [bashrun2](http://henning-bekel.de/bashrun2/), Bash, terminal
-- [xboomx](https://github.com/victorhaggqvist/xboomx), Python, X11
-- [shellex](https://github.com/Merovius/shellex), C, X11
-- [Kupfer](http://engla.github.io/kupfer/), Python, X11
+- [dmenu\_run](http://tools.suckless.org/dmenu/), Shell, X11
+- [gmrun](http://sourceforge.net/projects/gmrun/), C, X11
 - [lighthouse](https://github.com/emgram769/lighthouse), C, X11
+- [shellex](https://github.com/Merovius/shellex), C, X11
+- [xboomx](https://github.com/victorhaggqvist/xboomx), Python, X11
 - [xlauncher](https://github.com/vatriani/xlauncher), C, X11
 - [Albert](https://github.com/ManuelSchneid3r/albert), C++, X11
+- [Kupfer](http://engla.github.io/kupfer/), Python, X11
 
 ### Vim menus
 
-- [CtrlP](http://kien.github.io/ctrlp.vim/)
-- [Unite](https://github.com/Shougo/unite.vim)
-- [FuzzyFinder](http://www.vim.org/scripts/script.php?script_id=1984)
-- [LeaderF](https://github.com/Yggdroot/LeaderF)
 - [asyncfinder.vim](https://github.com/vim-scripts/asyncfinder.vim)
 - [ku](http://www.vim.org/scripts/script.php?script_id=2337)
+- [CtrlP](http://kien.github.io/ctrlp.vim/)
+- [FuzzyFinder](http://www.vim.org/scripts/script.php?script_id=1984)
+- [LeaderF](https://github.com/Yggdroot/LeaderF)
 - [LustyExplorer](http://www.vim.org/scripts/script.php?script_id=1890)
 - [LycosaExplorer](http://www.vim.org/scripts/script.php?script_id=3659)
+- [Unite](https://github.com/Shougo/unite.vim)
 
 ## License and copyright
 
