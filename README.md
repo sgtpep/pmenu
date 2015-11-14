@@ -59,6 +59,11 @@ Pick the title from the markdown file and jump to it:
     endfunction
     nnoremap <silent> <C-T> :call PmenuMarkdownTitle()<CR>
 
+Pick and show a definition from the WordNet dictionary on the dict server (dict.org by default) using either the curl or dict command:
+
+    pmenu -c "m={} && curl -s \"dict://dict.org/m:\${m:-a}:wn:prefix\" | grep -oP '(?<=\").+(?=\")' | sort -f | uniq" | xargs -I '{}' curl -s "dict://dict.org/d:{}:wn" | grep -vP "^(\d+ |\.)" | less
+    pmenu -c "dict -fm -d wn -s prefix -- {} | grep -oP '(?<=\t)[^\t]+$' | sort -f | uniq" | xargs -I '{}' curl -s "dict://dict.org/d:{}:wn" | grep -vP "^(\d+ |\.)" | less
+
 ## pmenu-run
 
 The script `pmenu-run` is an example of application launcher built with `pmenu` similar to `dmenu_run`, `gmrun` and `bashrun`. It scans for the aplication commands in \*.desktop files, detects if they are intended for terminal and automatically run them attached or detached to the it.
