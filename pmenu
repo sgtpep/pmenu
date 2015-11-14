@@ -221,7 +221,7 @@ def main(screen):
         # ^I, Tab
         elif char_code == curses.ascii.TAB:
             if filtered_items:
-                query_text = filtered_items[0]
+                query_text = filtered_items[selection_index]
 
         elif isinstance(char, str) and not curses.ascii.isctrl(char):
             query_text += char
