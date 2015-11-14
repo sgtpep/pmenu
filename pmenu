@@ -63,16 +63,18 @@ def get_command_items():
 
     return command_items
 
-def get_mru_items(mru_path, items):
+def get_mru_items(mru_path, input_items):
     if not mru_path or not os.path.exists(mru_path):
         return []
 
+    input_items += get_command_items()
+
     mru_file = open(mru_path, encoding='utf8', errors='replace')
     mru_items = mru_file.read().splitlines()
-    mru_items = [i for i in mru_items if i in items]
+    mru_items = [i for i in mru_items if i in input_items]
     mru_items.reverse()
 
-    items[:] = [i for i in items if i not in mru_items]
+    input_items[:] = [i for i in input_items if i not in mru_items]
 
     return mru_items
 
@@ -156,13 +158,14 @@ def get_filtered_items():
                         substring_matched_items.append(item)
             filtered_items += exact_matched_items + prefix_matched_items + substring_matched_items
 
+    filtered_items += get_command_items()
+
     return filtered_items
 
 def redraw(screen):
     screen.erase()
 
-    command_items = get_command_items()
-    items = filtered_items + command_items
+    items = filtered_items
     items = items[:curses.LINES - 1]
     for i, item in enumerate(items):
         item_attr = curses.A_REVERSE if i == selection_index else curses.A_NORMAL
@@ -268,9 +271,8 @@ if __name__ == '__main__':
     args = get_args()
     query_text = ''
     input_items = get_input_items()
-    command_items = get_command_items()
     mru_path = get_mru_path()
-    mru_items = get_mru_items(mru_path, input_items + command_items)
+    mru_items = get_mru_items(mru_path, input_items)
 
     result = redirect_stdio(lambda: curses_wrapper(main))
     if not result:
