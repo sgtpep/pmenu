@@ -163,10 +163,11 @@ def main(screen):
 
     query_text = ''
     selection_index = 0
-    filtered_items = get_filtered_items()
-    redraw(screen)
 
     while True:
+        filtered_items = get_filtered_items()
+        redraw(screen)
+
         try:
             char = screen.get_wch()
         except KeyboardInterrupt:
@@ -226,8 +227,6 @@ def main(screen):
             query_text += char
 
         selection_index = 0
-        filtered_items = get_filtered_items()
-        redraw(screen)
 
     if filtered_items:
         return True, filtered_items[selection_index]
