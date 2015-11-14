@@ -85,6 +85,9 @@ On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu
 
     optional arguments:
       -h, --help            show this help message and exit
+      -c COMMAND, --command COMMAND
+                            populate menu items from the shell command output ({}
+                            will be replaced by the input text)
       -n NAME, --name NAME  name of the usage cache
       -p PROMPT, --prompt PROMPT
                             prompt text

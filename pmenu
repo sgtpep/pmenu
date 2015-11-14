@@ -10,7 +10,7 @@ import shlex
 import subprocess
 import sys
 
-__version__ = '0.2.6'
+__version__ = '0.3.0'
 
 required_version = (3, 3)
 if sys.version_info < required_version:
