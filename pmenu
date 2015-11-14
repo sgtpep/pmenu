@@ -6,6 +6,8 @@ import fileinput
 import io
 import os
 import re
+import shlex
+import subprocess
 import sys
 
 __version__ = '0.2.6'
@@ -17,6 +19,7 @@ if sys.version_info < required_version:
 def get_args():
     parser = argparse.ArgumentParser(usage="pipe menu items to stdin or pass with as positional arguments")
     parser.add_argument('item', nargs='*', help="menu item text")
+    parser.add_argument('-c', '--command', help="populate menu items from the shell command output ({} will be replaced by the input text)")
     parser.add_argument('-n', '--name', help="name of the usage cache")
     parser.add_argument('-p', '--prompt', help="prompt text")
     parser.add_argument('-v', '--version', action='version', version="%(prog)s " + __version__)
@@ -48,16 +51,28 @@ def get_input_items():
 
     return input_items
 
-def get_mru_items(mru_path, input_items):
+def get_command_items():
+    if not args.command:
+        return []
+
+    command_argument = shlex.quote(query_text)
+    command = args.command.replace('{}', command_argument)
+    command_output = subprocess.check_output(command, shell=True, stderr=subprocess.DEVNULL)
+    command_output = command_output.decode('utf8', 'replace')
+    command_items = command_output.splitlines()
+
+    return command_items
+
+def get_mru_items(mru_path, items):
     if not mru_path or not os.path.exists(mru_path):
         return []
 
     mru_file = open(mru_path, encoding='utf8', errors='replace')
     mru_items = mru_file.read().splitlines()
-    mru_items = [i for i in mru_items if i in input_items]
+    mru_items = [i for i in mru_items if i in items]
     mru_items.reverse()
 
-    input_items[:] = [i for i in input_items if i not in mru_items]
+    items[:] = [i for i in items if i not in mru_items]
 
     return mru_items
 
@@ -146,9 +161,12 @@ def get_filtered_items():
 def redraw(screen):
     screen.erase()
 
-    for i, filtered_item in enumerate(filtered_items[:curses.LINES - 1]):
+    command_items = get_command_items()
+    items = filtered_items + command_items
+    items = items[:curses.LINES - 1]
+    for i, item in enumerate(items):
         item_attr = curses.A_REVERSE if i == selection_index else curses.A_NORMAL
-        screen.insstr(i + 1, 0, filtered_item[:curses.COLS], item_attr)
+        screen.insstr(i + 1, 0, item[:curses.COLS], item_attr)
 
     top_line_text = args.prompt + query_text
     top_line_offset = len(top_line_text) - (curses.COLS - 1)
@@ -159,9 +177,8 @@ def redraw(screen):
     screen.refresh()
 
 def main(screen):
-    global query_text, selection_index, filtered_items
+    global selection_index, filtered_items, query_text
 
-    query_text = ''
     selection_index = 0
 
     while True:
@@ -249,9 +266,11 @@ def add_mru_text(mru_path, mru_text):
 
 if __name__ == '__main__':
     args = get_args()
+    query_text = ''
     input_items = get_input_items()
+    command_items = get_command_items()
     mru_path = get_mru_path()
-    mru_items = get_mru_items(mru_path, input_items)
+    mru_items = get_mru_items(mru_path, input_items + command_items)
 
     result = redirect_stdio(lambda: curses_wrapper(main))
     if not result:
