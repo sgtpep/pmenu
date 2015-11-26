@@ -27,18 +27,19 @@ Pick some file from current directory:
 Pick some file from current directory for editing in VIM using Ctrl-P shortcut (a la [CtrlP](http://kien.github.io/ctrlp.vim/) plugin):
 
     function! Pmenu()
-      let mru_name = fnamemodify(getcwd(), ":t")
+      let item_command = "find -maxdepth 3 -type f -regextype posix-egrep ! -regex '.*/(__pycache__|\.git|\.svn|node_modules)/.*' -printf '%P\\n'"
       if isdirectory("./.git")
-        let filelist_command = "git ls-files"
-        if !empty(expand('%'))
-          let filelist_command .= " | grep -vxF " . shellescape(expand("%:."), 1)
-        endif
-      else
-        let filelist_command = "find -maxdepth 3 -type f " . shellescape("./" . expand("%:."), 1) . " ! -path '*/.git/*' ! -path '*/.svn/*' -printf '%P\n' | LC_COLLATE=C sort"
+        let item_command = "git ls-files"
       endif
-      let selected_paths = systemlist(filelist_command . " | pmenu -n " . shellescape(mru_name, 1))
-      if !empty(selected_paths)
-        execute "edit " . selected_paths[0]
+      let cache_name = fnamemodify(getcwd(), ":t")
+      let items = sort(systemlist(item_command))
+      let current_item = expand("%:.")
+      if !empty(current_item)
+        let items = filter(copy(items), "v:val != " . shellescape(current_item))
+      endif
+      let selected_items = systemlist("pmenu -n " . shellescape(cache_name), items)
+      if !empty(selected_items)
+        execute "edit " . selected_items[0]
       endif
       redraw!
     endfunction
