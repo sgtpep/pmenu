@@ -134,28 +134,24 @@ def get_filtered_items():
         filtered_items = mru_items + input_items
     else:
         filtered_items = []
-        word_regexes = [re.escape(i) for i in re.split(r"\s+", query_text.strip()) if i]
-        exact_regexes = [re.compile(r"^{}$".format(i), re.I) for i in word_regexes]
-        exact_word_regexes = [re.compile(r"\b{}\b".format(i), re.I) for i in word_regexes]
-        prefix_word_regexes = [re.compile(r"\b{}".format(i), re.I) for i in word_regexes]
-        substring_word_regexes = [re.compile(i, re.I) for i in word_regexes]
+        word_regexes = [re.escape(i) for i in re.split(r"\W+", query_text.strip()) if i]
+        exact_regexes = [re.compile(r"\b{}\b".format(i), re.I) for i in word_regexes]
+        prefix_regexes = [re.compile(r"\b{}".format(i), re.I) for i in word_regexes]
+        substring_regexes = [re.compile(i, re.I) for i in word_regexes]
         for items in (mru_items, input_items):
             exact_items = []
-            exact_word_items = []
-            prefix_word_items = []
-            substring_word_items = []
+            prefix_items = []
+            substring_items = []
             for item in items:
-                if not all(re.search(i, item) for i in substring_word_regexes):
+                if not all(re.search(i, item) for i in substring_regexes):
                     continue
-                elif any(re.search(i, item) for i in exact_regexes):
+                elif all(re.search(i, item) for i in exact_regexes):
                     exact_items.append(item)
-                elif any(re.search(i, item) for i in exact_word_regexes):
-                    exact_word_items.append(item)
-                elif any(re.search(i, item) for i in prefix_word_regexes):
-                    prefix_word_items.append(item)
+                elif all(re.search(i, item) for i in prefix_regexes):
+                    prefix_items.append(item)
                 else:
-                    substring_word_items.append(item)
-            filtered_items += exact_items + exact_word_items + prefix_word_items + substring_word_items
+                    substring_items.append(item)
+            filtered_items += exact_items + prefix_items + substring_items
 
     filtered_items += get_command_items()
 
