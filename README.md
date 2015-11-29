@@ -67,7 +67,7 @@ Pick and show a definition from the WordNet dictionary on the dict server (dict.
 
 ## pmenu-run
 
-The script `pmenu-run` is an example of application launcher built with `pmenu` similar to `dmenu_run`, `gmrun` and `bashrun`. It scans for the aplication commands in \*.desktop files, detects if they are intended for terminal and automatically run them attached or detached to the it.
+The script `pmenu-run` is an example of an application launcher built with `pmenu` similar to `dmenu_run`, `gmrun` and `bashrun`. It builds the menu from the system \*.desktop files and launches the selected item in the current terminal or detached from it depending on the application type.
 
 Bind some desktop shortcut to one the following commands depending of what terminal emulator you use:
 
