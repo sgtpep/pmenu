@@ -1,5 +1,5 @@
 # pmenu
-Dynamic menu like dmenu for terminal written in Python without dependencies with optional sorting by usage, application launcher and CtrlP alternative.
+A dynamic terminal-based menu inspired by dmenu written in Python without dependencies with an optional [MRU](https://en.wikipedia.org/wiki/Most_Recently_Used) ordering, application launcher and CtrlP alternative.
 
 Discussion: https://bbs.archlinux.org/viewtopic.php?id=201674.
 
