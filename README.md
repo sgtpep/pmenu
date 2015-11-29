@@ -11,59 +11,69 @@ Python 3.3+.
 
 Display some menu items:
 
-    echo -e "foo\nbar\nbaz" | pmenu
-    pmenu foo bar baz
-    echo -e "foo\nbar" | pmenu baz qux
+```bash
+echo -e "foo\nbar\nbaz" | pmenu
+pmenu foo bar baz
+echo -e "foo\nbar" | pmenu baz qux
+```
 
 ![screencast 1](https://raw.githubusercontent.com/sgtpep/pmenu/master/screencasts/1.gif)
 
 Pick some file from current directory:
 
-    command ls /usr/bin/ | pmenu
-    find -maxdepth 3 -type f ! -path "./.git/*" ! -path "./.svn/*" -printf '%P\n' | LC_COLLATE=C sort | pmenu
+```bash
+command ls /usr/bin/ | pmenu
+find -maxdepth 3 -type f ! -path "./.git/*" ! -path "./.svn/*" -printf '%P\n' | LC_COLLATE=C sort | pmenu
+```
 
 ![screencast 2](https://raw.githubusercontent.com/sgtpep/pmenu/master/screencasts/2.gif)
 
 Pick some file from current directory for editing in VIM using Ctrl-P shortcut (a la [CtrlP](http://kien.github.io/ctrlp.vim/) plugin):
 
-    function! Pmenu()
-      let item_command = "find -maxdepth 3 -type f -regextype posix-egrep ! -regex '.*/(__pycache__|\.git|\.svn|node_modules)/.*' -printf '%P\\n'"
-      if isdirectory("./.git")
-        let item_command = "git ls-files"
-      endif
-      let cache_name = fnamemodify(getcwd(), ":t")
-      let items = sort(systemlist(item_command))
-      let current_item = expand("%:.")
-      if !empty(current_item)
-        let items = filter(copy(items), "v:val != " . shellescape(current_item))
-      endif
-      let selected_items = systemlist("pmenu -n " . shellescape(cache_name), items)
-      if !empty(selected_items)
-        execute "edit " . selected_items[0]
-      endif
-      redraw!
-    endfunction
-    nnoremap <silent> <C-P> :call Pmenu()<CR>
-    vnoremap <silent> <C-P> :call Pmenu()<CR>
+```vim
+function! Pmenu()
+  let item_command = "find -maxdepth 3 -type f -regextype posix-egrep ! -regex '.*/(__pycache__|\.git|\.svn|node_modules)/.*' -printf '%P\\n'"
+  if isdirectory("./.git")
+    let item_command = "git ls-files"
+  endif
+  let cache_name = fnamemodify(getcwd(), ":t")
+  let items = sort(systemlist(item_command))
+  let current_item = expand("%:.")
+  if !empty(current_item)
+    let items = filter(copy(items), "v:val != " . shellescape(current_item))
+  endif
+  let selected_items = systemlist("pmenu -n " . shellescape(cache_name), items)
+  if !empty(selected_items)
+    execute "edit " . selected_items[0]
+  endif
+  redraw!
+endfunction
+nnoremap <silent> <C-P> :call Pmenu()<CR>
+vnoremap <silent> <C-P> :call Pmenu()<CR>
+```
 
 ![screencast 3](https://raw.githubusercontent.com/sgtpep/pmenu/master/screencasts/3.gif)
 
 Pick the title from the markdown file and jump to it:
 
-    function! PmenuMarkdownTitle()
-      let titles = filter(getline(1, '$'), "v:val =~ '^#\\+\\s'")
-      let selected_paths = systemlist('pmenu', titles)
-      if !empty(selected_paths)
-        call search('^#\+\s' . selected_paths[0])
-      endif
-      redraw!
-    endfunction
-    nnoremap <silent> <C-T> :call PmenuMarkdownTitle()<CR>
+```vim
+function! PmenuMarkdownTitle()
+  let titles = filter(getline(1, '$'), "v:val =~ '^#\\+\\s'")
+  let selected_paths = systemlist('pmenu', titles)
+  if !empty(selected_paths)
+    call search('^#\+\s' . selected_paths[0])
+  endif
+  redraw!
+endfunction
+nnoremap <silent> <C-T> :call PmenuMarkdownTitle()<CR>
+```
 
 Pick and show a definition from the WordNet dictionary on the dict server (dict.org by default) using either the curl or dict command:
 
-    pmenu -c "m={} && curl -s \"dict://dict.org/m:\${m:-a}:wn:prefix\" | grep -oP '(?<=\").+(?=\")' | sort -f | uniq" | xargs -I '{}' curl -s "dict://dict.org/d:{}:wn" | grep -vP "^(\d+ |\.)" | less
-    pmenu -c "dict -fm -d wn -s prefix -- {} | grep -oP '(?<=\t)[^\t]+$' | sort -f | uniq" | xargs -I '{}' curl -s "dict://dict.org/d:{}:wn" | grep -vP "^(\d+ |\.)" | less
+```bash
+pmenu -c "m={} && curl -s \"dict://dict.org/m:\${m:-a}:wn:prefix\" | grep -oP '(?<=\").+(?=\")' | sort -f | uniq" | xargs -I '{}' curl -s "dict://dict.org/d:{}:wn" | grep -vP "^(\d+ |\.)" | less
+pmenu -c "dict -fm -d wn -s prefix -- {} | grep -oP '(?<=\t)[^\t]+$' | sort -f | uniq" | xargs -I '{}' curl -s "dict://dict.org/d:{}:wn" | grep -vP "^(\d+ |\.)" | less
+```
 
 ## pmenu-run
 
@@ -71,8 +81,10 @@ The script `pmenu-run` is an example of an application launcher built with `pmen
 
 Bind some desktop shortcut to one the following commands depending of what terminal emulator you use:
 
-    xterm -T run -e pmenu-run
-    urxvt -title run -e bash -i -c "pmenu-run; :"
+```bash
+xterm -T run -e pmenu-run
+urxvt -title run -e bash -i -c "pmenu-run; :"
+```
 
 `pmenu-run` passes all provided options to `pmenu`. This could be used to add more items to application launcher, like `pmenu-run command1 command2 command3`.
 
@@ -84,20 +96,22 @@ On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu
 
 ## Command-line interface
 
-    usage: pipe menu items to stdin or pass them as positional arguments
+```
+usage: pipe menu items to stdin or pass them as positional arguments
 
-    positional arguments:
-      item                  menu item text
+positional arguments:
+  item                  menu item text
 
-    optional arguments:
-      -h, --help            show this help message and exit
-      -c COMMAND, --command COMMAND
-                            populate menu items from the shell command output ({}
-                            will be replaced by the input text)
-      -n NAME, --name NAME  name of the usage cache
-      -p PROMPT, --prompt PROMPT
-                            prompt text
-      -v, --version         show program's version number and exit
+optional arguments:
+  -h, --help            show this help message and exit
+  -c COMMAND, --command COMMAND
+                        populate menu items from the shell command output ({}
+                        will be replaced by the input text)
+  -n NAME, --name NAME  name of the usage cache
+  -p PROMPT, --prompt PROMPT
+                        prompt text
+  -v, --version         show program's version number and exit
+```
 
 ## Keyboard shortcuts
 
