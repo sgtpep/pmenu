@@ -201,6 +201,10 @@ def main(screen):
         elif char_code in (curses.ascii.ESC, curses.ascii.BEL):
             return
 
+        # ^D
+        elif char_code == curses.ascii.EOT:
+            return False, query_text
+
         # ^H, Backspace
         elif char_code in (curses.ascii.BS, curses.ascii.DEL) or char == curses.KEY_BACKSPACE:
             query_text = query_text[:-1]
@@ -212,7 +216,10 @@ def main(screen):
 
         # ^J, ^M, Enter
         elif char_code == curses.ascii.NL:
-            break
+            if filtered_items:
+                return True, filtered_items[selection_index]
+            else:
+                return False, query_text
 
         # ^N, Down
         elif char_code == curses.ascii.SO or char == curses.KEY_DOWN:
@@ -243,11 +250,6 @@ def main(screen):
 
         selection_index = 0
 
-    if filtered_items:
-        return True, filtered_items[selection_index]
-    else:
-        return False, query_text
-
 def add_mru_text(mru_path, mru_text):
     if not mru_path:
         return
@@ -273,7 +275,7 @@ if __name__ == '__main__':
     if not result:
         sys.exit(130)
 
-    is_existing_item, selection_text = result
+    is_existing_item, result_text = result
     if is_existing_item:
-        add_mru_text(mru_path, selection_text)
-    print(selection_text)
+        add_mru_text(mru_path, result_text)
+    print(result_text)
