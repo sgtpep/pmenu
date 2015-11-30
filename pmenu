@@ -17,11 +17,11 @@ if sys.version_info < required_version:
     sys.exit("Python {}.{} or newer is required.".format(*required_version))
 
 def get_args():
-    parser = argparse.ArgumentParser(usage="pipe menu items to stdin or pass with as positional arguments")
-    parser.add_argument('item', nargs='*', help="menu item text")
-    parser.add_argument('-c', '--command', help="populate menu items from the shell command output ({} will be replaced by the input text)")
-    parser.add_argument('-n', '--name', help="name of the usage cache")
-    parser.add_argument('-p', '--prompt', help="prompt text")
+    parser = argparse.ArgumentParser(usage="pipe newline-separated menu items to stdin and/or pass them as positional arguments")
+    parser.add_argument('item', nargs='*', help="the menu item text")
+    parser.add_argument('-c', '--command', help="the shell command which output will populate the menu items on every keystroke ({} will be replaced by the current input text)")
+    parser.add_argument('-n', '--name', help="the cache file name with the most recently used items")
+    parser.add_argument('-p', '--prompt', help="the prompt text")
     parser.add_argument('-v', '--version', action='version', version="%(prog)s " + __version__)
 
     args = parser.parse_args()
