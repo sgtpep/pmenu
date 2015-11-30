@@ -197,9 +197,22 @@ def main(screen):
             continue
 
         # see https://en.wikipedia.org/wiki/C0_and_C1_control_codes
+        # ^[, ^G, Esc
+        elif char_code in (curses.ascii.ESC, curses.ascii.BEL):
+            return
+
         # ^H, Backspace
         elif char_code in (curses.ascii.BS, curses.ascii.DEL) or char == curses.KEY_BACKSPACE:
             query_text = query_text[:-1]
+
+        # ^I, Tab
+        elif char_code == curses.ascii.TAB:
+            if filtered_items:
+                query_text = filtered_items[selection_index]
+
+        # ^J, ^M, Enter
+        elif char_code == curses.ascii.NL:
+            break
 
         # ^N, Down
         elif char_code == curses.ascii.SO or char == curses.KEY_DOWN:
@@ -217,10 +230,6 @@ def main(screen):
 
             continue
 
-        # ^[, ^G
-        elif char_code in (curses.ascii.ESC, curses.ascii.BEL):
-            return
-
         # ^U
         elif char_code == curses.ascii.NAK:
             query_text = ''
@@ -228,15 +237,6 @@ def main(screen):
         # ^W
         elif char_code == curses.ascii.ETB:
             query_text = re.sub(r"\w*[^\w]*$", '', query_text)
-
-        # ^J, ^M, Enter
-        elif char_code == curses.ascii.NL:
-            break
-
-        # ^I, Tab
-        elif char_code == curses.ascii.TAB:
-            if filtered_items:
-                query_text = filtered_items[selection_index]
 
         elif isinstance(char, str) and not curses.ascii.isctrl(char):
             query_text += char
