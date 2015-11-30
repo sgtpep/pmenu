@@ -1,5 +1,5 @@
 # pmenu
-A dynamic terminal-based menu inspired by dmenu written in Python without dependencies with an optional [MRU](https://en.wikipedia.org/wiki/Most_Recently_Used) ordering, application launcher and CtrlP alternative.
+A dynamic terminal-based menu inspired by dmenu written in Python without dependencies with an optional [MRU](https://en.wikipedia.org/wiki/Most_Recently_Used) ordering which could also be used as an application launcher and CtrlP alternative.
 
 Discussion: https://bbs.archlinux.org/viewtopic.php?id=201674.
 
@@ -19,7 +19,7 @@ echo -e "foo\nbar" | pmenu baz qux
 
 ![screencast 1](https://raw.githubusercontent.com/sgtpep/pmenu/master/screencasts/1.gif)
 
-Pick some file from current directory:
+Pick some file from the current directory:
 
 ```bash
 command ls /usr/bin/ | pmenu
@@ -28,7 +28,7 @@ find -maxdepth 3 -type f ! -path "./.git/*" ! -path "./.svn/*" -printf '%P\n' | 
 
 ![screencast 2](https://raw.githubusercontent.com/sgtpep/pmenu/master/screencasts/2.gif)
 
-Pick some file from current directory for editing in VIM using Ctrl-P shortcut (a la [CtrlP](http://kien.github.io/ctrlp.vim/) plugin):
+Pick some file from the current directory for editing in VIM using Ctrl-P shortcut (a la the [CtrlP](http://kien.github.io/ctrlp.vim/) plugin):
 
 ```vim
 function! Pmenu()
@@ -54,7 +54,7 @@ vnoremap <silent> <C-P> :call Pmenu()<CR>
 
 ![screencast 3](https://raw.githubusercontent.com/sgtpep/pmenu/master/screencasts/3.gif)
 
-Pick the title from the markdown file and jump to it:
+Pick a title from the markdown file and jump to it:
 
 ```vim
 function! PmenuMarkdownTitle()
@@ -77,50 +77,51 @@ pmenu -c "dict -fm -d wn -s prefix -- {} | grep -oP '(?<=\t)[^\t]+$' | sort -f |
 
 ## pmenu-run
 
-The script `pmenu-run` is an example of an application launcher built with `pmenu` similar to `dmenu_run`, `gmrun` and `bashrun`. It builds the menu from the system \*.desktop files and launches the selected item in the current terminal or detached from it depending on the application type.
+The script `pmenu-run` is an example of an application launcher built with `pmenu` similar to `dmenu_run`, `gmrun` and `bashrun`. It builds the menu from system \*.desktop files and launches the selected item in the current terminal or detached from it depending on the application type.
 
-Bind some desktop shortcut to one the following commands depending of what terminal emulator you use:
+Bind any shortcut using your desktop preferences to one the following commands depending of what terminal emulator you use:
 
 ```bash
 xterm -T run -e pmenu-run
 urxvt -title run -e bash -i -c "pmenu-run; :"
 ```
 
-`pmenu-run` passes all provided options to `pmenu`. This could be used to add more items to application launcher, like `pmenu-run command1 command2 command3`.
+`pmenu-run` passes all provided additional options to `pmenu`. This could be used to add more items to the launcher menu, like `pmenu-run command1 command2 command3`.
 
 ## Installation
 
-Copy `pmenu` (and optionally `pmenu-run`) to any location inside your `$PATH`, say `/usr/local/bin`.
+Copy `pmenu` (and optionally `pmenu-run`) to any location from your `$PATH`, say `/usr/local/bin`.
 
-On Arch Linux AUR package is available: https://aur.archlinux.org/packages/pmenu/.
+There is the AUR package for Arch Linux: https://aur.archlinux.org/packages/pmenu/.
 
 ## Command-line interface
 
 ```
-usage: pipe menu items to stdin or pass them as positional arguments
+usage: pipe newline-separated menu items to stdin and/or pass them as positional arguments
 
 positional arguments:
-  item                  menu item text
+  item                  the menu item text
 
 optional arguments:
   -h, --help            show this help message and exit
   -c COMMAND, --command COMMAND
-                        populate menu items from the shell command output ({}
-                        will be replaced by the input text)
-  -n NAME, --name NAME  name of the usage cache
+                        the shell command which output will populate the menu
+                        items on every keystroke ({} will be replaced by the
+                        current input text)
+  -n NAME, --name NAME  the cache file name with the most recently used items
   -p PROMPT, --prompt PROMPT
-                        prompt text
+                        the prompt text
   -v, --version         show program's version number and exit
 ```
 
 ## Keyboard shortcuts
 
-- `Ctrl-C`, `Ctrl-G`, `Ctrl-[`, `Escape`: quit without selecting a match
+- `Ctrl-C`, `Ctrl-G`, `Ctrl-[`, `Escape`: quit without selecting an item
 - `Ctrl-H`, `Backspace`: delete the character before the cursor
 - `Ctrl-I`, `Tab`: complete the selected item
 - `Ctrl-J`, `Ctrl-M`, `Enter`: quit and output the selected item
-- `Ctrl-N`, 'Down': select the next match
-- `Ctrl-P`, 'Up': select the previous match
+- `Ctrl-N`, 'Down': select the next item
+- `Ctrl-P`, 'Up': select the previous item
 - `Ctrl-U`: delete the entire line
 - `Ctrl-W`: delete the word before the cursor
 
