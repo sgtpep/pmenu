@@ -7,6 +7,8 @@ import io
 import os
 import re
 import shlex
+import shutil
+import signal
 import subprocess
 import sys
 
@@ -158,26 +160,36 @@ def get_filtered_items():
     return filtered_items
 
 def redraw(screen):
-    screen.erase()
+    try:
+        screen.erase()
 
-    items = filtered_items
-    items = items[:curses.LINES - 1]
-    for i, item in enumerate(items):
-        item_attr = curses.A_REVERSE if i == selection_index else curses.A_NORMAL
-        screen.insstr(i + 1, 0, item[:curses.COLS], item_attr)
+        items = filtered_items
+        items = items[:curses.LINES - 1]
+        for i, item in enumerate(items):
+            item_attr = curses.A_REVERSE if i == selection_index else curses.A_NORMAL
+            screen.insstr(i + 1, 0, item[:curses.COLS - 1], item_attr)
 
-    top_line_text = args.prompt + query_text
-    top_line_offset = len(top_line_text) - (curses.COLS - 1)
-    if top_line_offset < 0:
-        top_line_offset = 0
-    screen.addstr(0, 0, top_line_text[top_line_offset:])
+        top_line_text = args.prompt + query_text
+        top_line_offset = len(top_line_text) - (curses.COLS - 1)
+        if top_line_offset < 0:
+            top_line_offset = 0
+        screen.addstr(0, 0, top_line_text[top_line_offset:])
 
-    screen.refresh()
+        screen.refresh()
+    except curses.error:
+        pass
 
 def main(screen):
     global selection_index, filtered_items, query_text
 
     selection_index = 0
+
+    def on_sigwinch(*args):
+        columns, lines = shutil.get_terminal_size()
+        curses.resizeterm(lines, columns)
+        selection_index = 0
+        redraw(screen)
+    signal.signal(signal.SIGWINCH, on_sigwinch)
 
     while True:
         filtered_items = get_filtered_items()
@@ -187,18 +199,13 @@ def main(screen):
             char = screen.get_wch()
         except KeyboardInterrupt:
             return
-        char_code = isinstance(char, str) and ord(char)
-
-        if char == curses.KEY_RESIZE:
-            selection_index = 0
-            curses.resizeterm(*screen.getmaxyx())
-            redraw(screen)
-
+        except curses.error:
             continue
+        char_code = isinstance(char, str) and ord(char)
 
         # see https://en.wikipedia.org/wiki/C0_and_C1_control_codes
         # ^[, ^G, Esc
-        elif char_code in (curses.ascii.ESC, curses.ascii.BEL):
+        if char_code in (curses.ascii.ESC, curses.ascii.BEL):
             return
 
         # ^D
