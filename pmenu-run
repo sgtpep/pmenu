@@ -33,10 +33,8 @@ else
   cmd=`grep -oP -m 1 "(?<=^Exec=).+" "$desktop_path"`
   cmd=${cmd// -[[:alnum:]]* %[[:alpha:]]/}
   cmd=${cmd// %[[:alpha:]]/}
-  if ! grep -q ^Terminal=true "$desktop_path"; then
-    $cmd &
-    disown
-    exit
-  fi
+  grep -q ^Terminal=true "$desktop_path" || exec nohup setsid $cmd > /dev/null
 fi
+
+printf "\e]0;${cmd%% *}\a"
 exec $cmd
