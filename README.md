@@ -82,8 +82,8 @@ The script `pmenu-run` is an example of an application launcher built with `pmen
 Bind any shortcut using your desktop preferences to one the following commands depending of what terminal emulator you use:
 
 ```bash
-xterm -T run -e pmenu-run
-urxvt -title run -e bash -i -c "pmenu-run; :"
+xterm -e pmenu-run
+urxvt -e pmenu-run
 ```
 
 `pmenu-run` passes all provided additional options to `pmenu`. This could be used to add more items to the launcher menu, like `pmenu-run command1 command2 command3`.
