@@ -12,7 +12,7 @@ import signal
 import subprocess
 import sys
 
-__version__ = '0.3.0'
+__version__ = '0.3.2'
 
 required_version = (3, 3)
 if sys.version_info < required_version:
