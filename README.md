@@ -75,6 +75,12 @@ pmenu -c "m={} && curl -s \"dict://dict.org/m:\${m:-a}:wn:prefix\" | grep -oP '(
 pmenu -c "dict -fm -d wn -s prefix -- {} | grep -oP '(?<=\t)[^\t]+$' | sort -f | uniq" | xargs -I '{}' curl -s "dict://dict.org/d:{}:wn" | grep -vP "^(\d+ |\.)" | less
 ```
 
+Pick and start a VirtualBox virtual machine:
+
+```bash
+vboxmanage startvm "`vboxmanage list vms | sed 's/^"\(.*\)".*/\1/' | pmenu`"
+```
+
 ## pmenu-run
 
 The script `pmenu-run` is an example of an application launcher built with `pmenu` similar to `dmenu_run`, `gmrun` and `bashrun`. It builds the menu from system \*.desktop files and launches the selected item in the current terminal or detached from it depending on the application type.
