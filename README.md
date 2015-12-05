@@ -81,6 +81,12 @@ Pick and start a VirtualBox virtual machine:
 vboxmanage startvm "`vboxmanage list vms | sed 's/^"\(.*\)".*/\1/' | pmenu`"
 ```
 
+Pick and jump to a subdirectory in ~/Projects:
+
+```bash
+cd "`cd ~; pmenu Projects/*`"
+```
+
 ## pmenu-run
 
 The script `pmenu-run` is an example of an application launcher built with `pmenu` similar to `dmenu_run`, `gmrun` and `bashrun`. It builds the menu from system \*.desktop files and launches the selected item in the current terminal or detached from it depending on the application type.
