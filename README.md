@@ -144,12 +144,19 @@ optional arguments:
 - [dmenu](http://tools.suckless.org/dmenu/), C, X11
 - [dmenu2](https://bitbucket.org/melek/dmenu2), C, X11
 - [fzf](https://github.com/junegunn/fzf), Go, terminal
+- [gof](https://github.com/mattn/gof), Go, terminal
 - [happyfinder](https://github.com/hugows/hf), Go, terminal
+- [hmenu](https://github.com/sulami/hmenu), Haskell, terminal
+- [peco](https://github.com/peco/peco), Go, terminal
 - [percol](https://github.com/mooz/percol), Python, terminal
 - [pick](https://github.com/thoughtbot/pick), C, terminal
 - [rofi](https://github.com/DaveDavenport/rofi) C, X11
+- [selector](http://fleuret.org/cgi-bin/gitweb/gitweb.cgi?p=selector), C, terminal
 - [slmenu](https://bitbucket.org/rafaelgg/slmenu), C, terminal
+- [tmenu](https://github.com/dhamidi/tmenu), C, terminal
+- [tpick](https://github.com/smblott-github/tpick), C, terminal
 - [Heatseeker](https://github.com/rschmitt/heatseeker), Rust, terminal
+- [Icepick](https://github.com/felipesere/icepick), Rust, terminal
 - [PathPicker](https://facebook.github.io/PathPicker/), Python, terminal
 - [Selecta](https://github.com/garybernhardt/selecta), Ruby, terminal
 
