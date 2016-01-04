@@ -71,8 +71,8 @@ nnoremap <silent> <C-T> :call PmenuMarkdownTitle()<CR>
 Pick and show a definition from the WordNet dictionary on the dict server (dict.org by default) using either the curl or dict command:
 
 ```bash
-pmenu -c "m={} && curl -s \"dict://dict.org/m:\${m:-a}:wn:prefix\" | grep -oP '(?<=\").+(?=\")' | sort -f | uniq" | xargs -I '{}' curl -s "dict://dict.org/d:{}:wn" | grep -vP "^(\d+ |\.)" | less
-pmenu -c "dict -fm -d wn -s prefix -- {} | grep -oP '(?<=\t)[^\t]+$' | sort -f | uniq" | xargs -I '{}' curl -s "dict://dict.org/d:{}:wn" | grep -vP "^(\d+ |\.)" | less
+pmenu -c "m={} && curl -s \"dict://dict.org/m:\${m:-a}:wn:prefix\" | awk -F \\\" '! array[tolower(\$2)]++ { print \$2 }'" | xargs -I '{}' curl -s "dict://dict.org/d:{}:wn" | grep -vP "^(\d+ |\.)" | less
+pmenu -c "dict -fm -d wn -s prefix -- {} | awk '! array[tolower(\$4)]++ { print \$4 }'" | xargs dict -d wn | less
 ```
 
 Pick and start a VirtualBox virtual machine:
