@@ -84,7 +84,7 @@ vboxmanage startvm "`vboxmanage list vms | sed 's/^"\(.*\)".*/\1/' | pmenu`"
 Pick and jump to a subdirectory in ~/Projects:
 
 ```bash
-cd "`cd ~; pmenu Projects/*`"
+cd "`cd ~/Projects; pmenu *`"
 ```
 
 ## pmenu-run
