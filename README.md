@@ -145,6 +145,7 @@ optional arguments:
 - [dmenu2](https://bitbucket.org/melek/dmenu2), C, X11
 - [fzf](https://github.com/junegunn/fzf), Go, terminal
 - [gof](https://github.com/mattn/gof), Go, terminal
+- [gpicker](http://www.nongnu.org/gpicker/), C, X11
 - [happyfinder](https://github.com/hugows/hf), Go, terminal
 - [hmenu](https://github.com/sulami/hmenu), Haskell, terminal
 - [peco](https://github.com/peco/peco), Go, terminal
