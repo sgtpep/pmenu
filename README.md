@@ -44,7 +44,7 @@ function! Pmenu()
   endif
   let selected_items = systemlist("pmenu -n " . shellescape(cache_name), items)
   if !empty(selected_items)
-    execute "edit " . selected_items[0]
+    execute "edit " . fnameescape(selected_items[0])
   endif
   redraw!
 endfunction
