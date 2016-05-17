@@ -144,6 +144,7 @@ optional arguments:
 - [dmenu](http://tools.suckless.org/dmenu/), C, X11
 - [dmenu2](https://bitbucket.org/melek/dmenu2), C, X11
 - [fzf](https://github.com/junegunn/fzf), Go, terminal
+- [fzy](https://github.com/jhawthorn/fzy), C, terminal
 - [gof](https://github.com/mattn/gof), Go, terminal
 - [gpicker](http://www.nongnu.org/gpicker/), C, X11
 - [happyfinder](https://github.com/hugows/hf), Go, terminal
