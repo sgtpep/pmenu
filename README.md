@@ -142,8 +142,12 @@ optional arguments:
 
 ### dmenu-like menus
 
-- [dmenu](http://tools.suckless.org/dmenu/) `C` `X11`
+- [Heatseeker](https://github.com/rschmitt/heatseeker) `Rust` `terminal`
+- [Icepick](https://github.com/felipesere/icepick) `Rust` `terminal`
+- [PathPicker](https://facebook.github.io/PathPicker/) `Python` `terminal`
+- [Selecta](https://github.com/garybernhardt/selecta) `Ruby` `terminal`
 - [dmenu2](https://bitbucket.org/melek/dmenu2) `C` `X11`
+- [dmenu](http://tools.suckless.org/dmenu/) `C` `X11`
 - [fzf](https://github.com/junegunn/fzf) `Go` `terminal`
 - [fzy](https://github.com/jhawthorn/fzy) `C` `terminal`
 - [gof](https://github.com/mattn/gof) `Go` `terminal`
@@ -158,40 +162,36 @@ optional arguments:
 - [slmenu](https://bitbucket.org/rafaelgg/slmenu) `C` `terminal`
 - [tmenu](https://github.com/dhamidi/tmenu) `C` `terminal`
 - [tpick](https://github.com/smblott-github/tpick) `C` `terminal`
-- [Heatseeker](https://github.com/rschmitt/heatseeker) `Rust` `terminal`
-- [Icepick](https://github.com/felipesere/icepick) `Rust` `terminal`
-- [PathPicker](https://facebook.github.io/PathPicker/) `Python` `terminal`
-- [Selecta](https://github.com/garybernhardt/selecta) `Ruby` `terminal`
 
 ### dmenu wrappers
 
-- [yegonesh](https://github.com/klowner/yegonesh) `Go`
-- [xboomx](https://github.com/victorhaggqvist/xboomx) `Python`
 - [Yeganesh](http://dmwit.com/yeganesh/) `Haskel`
+- [xboomx](https://github.com/victorhaggqvist/xboomx) `Python`
+- [yegonesh](https://github.com/klowner/yegonesh) `Go`
 
 ### Application launchers
 
-- [bashrun](http://bashrun.sourceforge.net/) `Bash` `terminal`
+- [Albert](https://github.com/ManuelSchneid3r/albert) `C++` `X11`
+- [Kupfer](http://engla.github.io/kupfer/) `Python` `X11`
 - [bashrun2](http://henning-bekel.de/bashrun2/) `Bash` `terminal`
+- [bashrun](http://bashrun.sourceforge.net/) `Bash` `terminal`
 - [dmenu\_run](http://tools.suckless.org/dmenu/) `Shell` `X11`
 - [gmrun](http://sourceforge.net/projects/gmrun/) `C` `X11`
 - [lighthouse](https://github.com/emgram769/lighthouse) `C` `X11`
 - [shellex](https://github.com/Merovius/shellex) `C` `X11`
 - [xboomx](https://github.com/victorhaggqvist/xboomx) `Python` `X11`
 - [xlauncher](https://github.com/vatriani/xlauncher) `C` `X11`
-- [Albert](https://github.com/ManuelSchneid3r/albert) `C++` `X11`
-- [Kupfer](http://engla.github.io/kupfer/) `Python` `X11`
 
 ### Vim menus
 
-- [asyncfinder.vim](https://github.com/vim-scripts/asyncfinder.vim)
-- [ku](http://www.vim.org/scripts/script.php?script_id=2337)
 - [CtrlP](http://kien.github.io/ctrlp.vim/)
 - [FuzzyFinder](http://www.vim.org/scripts/script.php?script_id=1984)
 - [LeaderF](https://github.com/Yggdroot/LeaderF)
 - [LustyExplorer](http://www.vim.org/scripts/script.php?script_id=1890)
 - [LycosaExplorer](http://www.vim.org/scripts/script.php?script_id=3659)
 - [Unite](https://github.com/Shougo/unite.vim)
+- [asyncfinder.vim](https://github.com/vim-scripts/asyncfinder.vim)
+- [ku](http://www.vim.org/scripts/script.php?script_id=2337)
 
 ## License and copyright
 
