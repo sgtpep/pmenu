@@ -178,6 +178,7 @@ optional arguments:
 - [dmenu\_run](http://tools.suckless.org/dmenu/) `Shell` `X11`
 - [gmrun](http://sourceforge.net/projects/gmrun/) `C` `X11`
 - [lighthouse](https://github.com/emgram769/lighthouse) `C` `X11`
+- [rrun](https://github.com/buster/rrun) `Rust` `X11`
 - [shellex](https://github.com/Merovius/shellex) `C` `X11`
 - [xboomx](https://github.com/victorhaggqvist/xboomx) `Python` `X11`
 - [xlauncher](https://github.com/vatriani/xlauncher) `C` `X11`
