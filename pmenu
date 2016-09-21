@@ -109,7 +109,7 @@ def curses_wrapper(func):
         screen = curses.initscr()
         curses.noecho()
         curses.cbreak()
-        screen.keypad(1)
+        screen.keypad(True)
 
         if is_vim:
             curses.curs_set(1)
@@ -117,7 +117,7 @@ def curses_wrapper(func):
         return func(screen)
     finally:
         if 'screen' in locals():
-            screen.keypad(0)
+            screen.keypad(False)
             curses.echo()
             try:
                 curses.nocbreak()
