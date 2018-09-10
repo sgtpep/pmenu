@@ -160,8 +160,10 @@ optional arguments:
 - [rofi](https://github.com/DaveDavenport/rofi) `C` `X11`
 - [selector](http://fleuret.org/cgi-bin/gitweb/gitweb.cgi?p=selector) `C` `terminal`
 - [slmenu](https://bitbucket.org/rafaelgg/slmenu) `C` `terminal`
+- [smenu](https://github.com/p-gen/smenu) `C` `terminal`
 - [tmenu](https://github.com/dhamidi/tmenu) `C` `terminal`
 - [tpick](https://github.com/smblott-github/tpick) `C` `terminal`
+- [vis-menu](http://martanne.github.io/vis/man/vis-menu.1.html) `C` `terminal`
 
 ### dmenu wrappers
 
