@@ -177,7 +177,7 @@ optional arguments:
 - [Kupfer](http://engla.github.io/kupfer/) `Python` `X11`
 - [bashrun2](http://henning-bekel.de/bashrun2/) `Bash` `terminal`
 - [bashrun](http://bashrun.sourceforge.net/) `Bash` `terminal`
-- [dmenu\_run](http://tools.suckless.org/dmenu/) `Shell` `X11`
+- [dmenu_run](http://tools.suckless.org/dmenu/) `Shell` `X11`
 - [gmrun](http://sourceforge.net/projects/gmrun/) `C` `X11`
 - [lighthouse](https://github.com/emgram769/lighthouse) `C` `X11`
 - [rrun](https://github.com/buster/rrun) `Rust` `X11`
