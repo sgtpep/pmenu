@@ -146,6 +146,7 @@ optional arguments:
 - [Icepick](https://github.com/felipesere/icepick) `Rust` `terminal`
 - [PathPicker](https://facebook.github.io/PathPicker/) `Python` `terminal`
 - [Selecta](https://github.com/garybernhardt/selecta) `Ruby` `terminal`
+- [bemenu](https://github.com/Cloudef/bemenu) `C` `Wayland` `X11` `terminal`
 - [dmenu2](https://bitbucket.org/melek/dmenu2) `C` `X11`
 - [dmenu](http://tools.suckless.org/dmenu/) `C` `X11`
 - [fzf](https://github.com/junegunn/fzf) `Go` `terminal`
