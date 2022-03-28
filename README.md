@@ -164,6 +164,7 @@ optional arguments:
 - [smenu](https://github.com/p-gen/smenu) `C` `terminal`
 - [tmenu](https://github.com/dhamidi/tmenu) `C` `terminal`
 - [tpick](https://github.com/smblott-github/tpick) `C` `terminal`
+- [ppick](https://github.com/alanbork/ppick) 'C' 'terminal'
 - [vis-menu](http://martanne.github.io/vis/man/vis-menu.1.html) `C` `terminal`
 
 ### dmenu wrappers
